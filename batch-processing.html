@@ -74,7 +74,7 @@
               </ul>
             </div>
           </label>
-          <button class="btn btn-sm btn-outline" data-toast="New company wizard started (UI only)">
+          <button class="btn btn-sm btn-primary" onclick="document.getElementById('newCompanyModal').showModal()">
             <i data-lucide="plus" class="w-4 h-4"></i>New Company
           </button>
           <div class="hidden md:flex items-center gap-2 rounded-lg bg-base-100 border border-base-300 px-3 py-1.5 text-xs text-base-content/70">
@@ -219,6 +219,82 @@
     </main>
   </div>
 </div>
+
+<dialog id="newCompanyModal" class="modal">
+  <div class="modal-box max-w-2xl">
+    <form method="dialog">
+      <button class="btn btn-sm btn-circle btn-ghost absolute right-3 top-3">✕</button>
+    </form>
+    <div class="flex items-center gap-3 mb-4">
+      <span class="w-10 h-10 rounded-lg bg-primary/10 text-primary flex items-center justify-center shrink-0"><i data-lucide="building-2" class="w-5 h-5"></i></span>
+      <div>
+        <h3 class="font-semibold text-lg">New Company</h3>
+        <p class="text-xs text-base-content/50">Set up a new company record for HR Acquisition.</p>
+      </div>
+    </div>
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+      <div class="form-control sm:col-span-2">
+        <label class="label py-1"><span class="label-text text-xs">Company Name</span></label>
+        <input class="input input-bordered input-sm" placeholder="e.g. Stantec Consulting Ltd." />
+      </div>
+      <div class="form-control">
+        <label class="label py-1"><span class="label-text text-xs">Company Code</span></label>
+        <input class="input input-bordered input-sm" placeholder="e.g. STN-CA-004" />
+      </div>
+      <div class="form-control">
+        <label class="label py-1"><span class="label-text text-xs">Legal Company Name</span></label>
+        <input class="input input-bordered input-sm" placeholder="Legal entity name" />
+      </div>
+      <div class="form-control">
+        <label class="label py-1"><span class="label-text text-xs">Country</span></label>
+        <select class="select select-bordered select-sm">
+          <option selected disabled>Select country</option>
+          <option>Canada</option><option>United States</option><option>United Kingdom</option><option>Germany</option><option>Singapore</option>
+        </select>
+      </div>
+      <div class="form-control">
+        <label class="label py-1"><span class="label-text text-xs">Currency</span></label>
+        <select class="select select-bordered select-sm">
+          <option selected disabled>Select currency</option>
+          <option>CAD - Canadian Dollar</option><option>USD - US Dollar</option><option>EUR - Euro</option><option>GBP - British Pound</option>
+        </select>
+      </div>
+      <div class="form-control">
+        <label class="label py-1"><span class="label-text text-xs">Language</span></label>
+        <select class="select select-bordered select-sm">
+          <option selected>English</option><option>Français</option><option>Español</option>
+        </select>
+      </div>
+      <div class="form-control">
+        <label class="label py-1"><span class="label-text text-xs">Time Zone</span></label>
+        <select class="select select-bordered select-sm">
+          <option selected disabled>Select time zone</option>
+          <option>(UTC-05:00) Eastern Time</option><option>(UTC-08:00) Pacific Time</option><option>(UTC+00:00) London</option><option>(UTC+01:00) Berlin</option>
+        </select>
+      </div>
+      <div class="form-control">
+        <label class="label py-1"><span class="label-text text-xs">Effective Date</span></label>
+        <input type="date" class="input input-bordered input-sm" />
+      </div>
+      <div class="form-control sm:col-span-2">
+        <label class="label py-1"><span class="label-text text-xs">Default Business Center</span></label>
+        <select class="select select-bordered select-sm">
+          <option selected disabled>Select business center</option>
+          <option>BC-100 · Corporate HQ</option><option>BC-200 · EMEA Operations</option><option>BC-300 · APAC Shared Services</option><option>BC-400 · LATAM Delivery</option>
+        </select>
+      </div>
+    </div>
+    <div class="modal-action">
+      <form method="dialog" class="flex gap-2">
+        <button class="btn btn-ghost btn-sm">Cancel</button>
+        <button class="btn btn-primary btn-sm" data-toast="Company created (UI only)">Create Company</button>
+      </form>
+    </div>
+  </div>
+  <form method="dialog" class="modal-backdrop">
+    <button>close</button>
+  </form>
+</dialog>
 
 <div id="toastContainer" class="toast toast-end"></div>
 <script src="assets/js/app.js"></script>
