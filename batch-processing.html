@@ -164,8 +164,8 @@
           <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3">
             <input type="text" placeholder="Employee ID" class="input input-bordered input-sm" />
             <input type="text" placeholder="Name" class="input input-bordered input-sm" />
-            <input type="text" placeholder="Business Center" class="input input-bordered input-sm" />
-            <input type="text" placeholder="Department" class="input input-bordered input-sm" />
+            <input type="text" placeholder="Office Location" class="input input-bordered input-sm" />
+            <input type="text" placeholder="Country" class="input input-bordered input-sm" />
             <select class="select select-bordered select-sm">
               <option value="">Status: Any</option>
               <option>Active</option><option>On Leave</option><option>Terminated</option>
@@ -178,68 +178,43 @@
         </div>
       </div>
 
-      <div class="grid grid-cols-1 xl:grid-cols-3 gap-4">
-        <div class="xl:col-span-2">
-          <!-- Selection toolbar -->
-          <div class="flex flex-wrap items-center gap-2 mb-3">
-            <span class="text-sm text-base-content/60">Selected: <span class="font-semibold text-base-content" data-selection-count-for="table-batch">0</span> of 8</span>
-            <div class="grow"></div>
-            <button class="btn btn-xs btn-outline" data-toast="All rows selected">Select All</button>
-            <button class="btn btn-xs btn-outline" data-toast="Selection cleared">Deselect All</button>
-            <button class="btn btn-xs btn-outline" data-toast="Selected rows included">Include All</button>
-            <button class="btn btn-xs btn-outline" data-toast="Selected rows excluded">Exclude All</button>
-          </div>
+      <!-- Selection toolbar -->
+      <div class="flex flex-wrap items-center gap-2 mb-3">
+        <span class="text-sm text-base-content/60">Selected: <span class="font-semibold text-base-content" data-selection-count-for="table-batch">0</span> of 8</span>
+        <div class="grow"></div>
+        <button class="btn btn-xs btn-outline" data-toast="All rows selected">Select All</button>
+        <button class="btn btn-xs btn-outline" data-toast="Selection cleared">Deselect All</button>
+        <button class="btn btn-xs btn-outline" data-toast="Selected rows included">Include All</button>
+        <button class="btn btn-xs btn-outline" data-toast="Selected rows excluded">Exclude All</button>
+      </div>
 
-          <div class="overflow-x-auto rounded-box border border-base-300 bg-base-200">
-            <table class="table table-zebra" id="table-batch">
-              <thead>
-                <tr>
-                  <th><input type="checkbox" class="checkbox checkbox-sm" data-select-all="table-batch" /></th>
-                  <th data-sort-key>Employee ID <i data-lucide="chevrons-up-down" class="w-3.5 h-3.5 inline sort-icon"></i></th>
-                  <th data-sort-key>Name <i data-lucide="chevrons-up-down" class="w-3.5 h-3.5 inline sort-icon"></i></th>
-                  <th data-sort-key>Business Center <i data-lucide="chevrons-up-down" class="w-3.5 h-3.5 inline sort-icon"></i></th>
-                  <th data-sort-key>Department <i data-lucide="chevrons-up-down" class="w-3.5 h-3.5 inline sort-icon"></i></th>
-                  <th data-sort-key>Quality Check <i data-lucide="chevrons-up-down" class="w-3.5 h-3.5 inline sort-icon"></i></th>
-                  <th>Include</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr><td><input type="checkbox" class="checkbox checkbox-sm" data-row-checkbox /></td><td>EMP-10024</td><td>Alicia Ferreira</td><td>BC-100</td><td>Human Resources</td><td><span class="badge badge-success badge-sm">Passed</span></td><td><input type="checkbox" class="toggle toggle-sm toggle-success" checked /></td></tr>
-                <tr><td><input type="checkbox" class="checkbox checkbox-sm" data-row-checkbox /></td><td>EMP-10031</td><td>Marcus Lindqvist</td><td>BC-200</td><td>Finance</td><td><span class="badge badge-warning badge-sm">Warning</span></td><td><input type="checkbox" class="toggle toggle-sm toggle-success" checked /></td></tr>
-                <tr><td><input type="checkbox" class="checkbox checkbox-sm" data-row-checkbox /></td><td>EMP-10045</td><td>Wei Chen</td><td>BC-300</td><td>Engineering</td><td><span class="badge badge-success badge-sm">Passed</span></td><td><input type="checkbox" class="toggle toggle-sm toggle-success" checked /></td></tr>
-                <tr><td><input type="checkbox" class="checkbox checkbox-sm" data-row-checkbox /></td><td>EMP-10052</td><td>Sofia Ramirez</td><td>BC-400</td><td>Operations</td><td><span class="badge badge-error badge-sm">Failed</span></td><td><input type="checkbox" class="toggle toggle-sm toggle-success" /></td></tr>
-                <tr><td><input type="checkbox" class="checkbox checkbox-sm" data-row-checkbox /></td><td>EMP-10067</td><td>Priya Natarajan</td><td>BC-100</td><td>Legal</td><td><span class="badge badge-success badge-sm">Passed</span></td><td><input type="checkbox" class="toggle toggle-sm toggle-success" checked /></td></tr>
-                <tr><td><input type="checkbox" class="checkbox checkbox-sm" data-row-checkbox /></td><td>EMP-10078</td><td>David Okonkwo</td><td>BC-200</td><td>Business Development</td><td><span class="badge badge-success badge-sm">Passed</span></td><td><input type="checkbox" class="toggle toggle-sm toggle-success" checked /></td></tr>
-                <tr><td><input type="checkbox" class="checkbox checkbox-sm" data-row-checkbox /></td><td>EMP-10089</td><td>Emma Johansson</td><td>BC-300</td><td>Engineering</td><td><span class="badge badge-warning badge-sm">Warning</span></td><td><input type="checkbox" class="toggle toggle-sm toggle-success" /></td></tr>
-                <tr><td><input type="checkbox" class="checkbox checkbox-sm" data-row-checkbox /></td><td>EMP-10093</td><td>Carlos Mendoza</td><td>BC-400</td><td>Human Resources</td><td><span class="badge badge-success badge-sm">Passed</span></td><td><input type="checkbox" class="toggle toggle-sm toggle-success" checked /></td></tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
-
-        <!-- Error Summary -->
-        <div class="card bg-base-200 border border-base-300 h-fit">
-          <div class="card-body">
-            <h3 class="card-title text-sm">Error Summary</h3>
-            <ul class="text-sm divide-y divide-base-300">
-              <li class="py-2">
-                <p class="font-medium flex items-center gap-2"><i data-lucide="x-circle" class="w-4 h-4 text-error"></i>EMP-10052 · Missing manager assignment</p>
-                <p class="text-xs text-base-content/50 ml-6">Sofia Ramirez has no active reporting manager on file.</p>
-              </li>
-              <li class="py-2">
-                <p class="font-medium flex items-center gap-2"><i data-lucide="alert-triangle" class="w-4 h-4 text-warning"></i>EMP-10031 · Duplicate email domain check</p>
-                <p class="text-xs text-base-content/50 ml-6">Email format flagged for secondary review.</p>
-              </li>
-              <li class="py-2">
-                <p class="font-medium flex items-center gap-2"><i data-lucide="alert-triangle" class="w-4 h-4 text-warning"></i>EMP-10089 · Location mismatch</p>
-                <p class="text-xs text-base-content/50 ml-6">Location code does not match business center default.</p>
-              </li>
-            </ul>
-            <button class="btn btn-sm btn-outline mt-2" data-toast="Opening error report in Excel (UI only)">
-              <i data-lucide="file-spreadsheet" class="w-4 h-4"></i>Open Error Report in Excel
-            </button>
-          </div>
-        </div>
+      <div class="overflow-x-auto rounded-box border border-base-300 bg-base-200">
+        <table class="table table-zebra" id="table-batch">
+          <thead>
+            <tr>
+              <th><input type="checkbox" class="checkbox checkbox-sm" data-select-all="table-batch" /> Include</th>
+              <th data-sort-key>Employee ID <i data-lucide="chevrons-up-down" class="w-3.5 h-3.5 inline sort-icon"></i></th>
+              <th data-sort-key>Name <i data-lucide="chevrons-up-down" class="w-3.5 h-3.5 inline sort-icon"></i></th>
+              <th data-sort-key>Employee Number <i data-lucide="chevrons-up-down" class="w-3.5 h-3.5 inline sort-icon"></i></th>
+              <th data-sort-key>Office Location <i data-lucide="chevrons-up-down" class="w-3.5 h-3.5 inline sort-icon"></i></th>
+              <th data-sort-key>Country <i data-lucide="chevrons-up-down" class="w-3.5 h-3.5 inline sort-icon"></i></th>
+              <th data-sort-key>Employee Status <i data-lucide="chevrons-up-down" class="w-3.5 h-3.5 inline sort-icon"></i></th>
+              <th data-sort-key>STC <i data-lucide="chevrons-up-down" class="w-3.5 h-3.5 inline sort-icon"></i></th>
+              <th data-sort-key>Leave/Termination Date <i data-lucide="chevrons-up-down" class="w-3.5 h-3.5 inline sort-icon"></i></th>
+              <th data-sort-key>Quality Check <i data-lucide="chevrons-up-down" class="w-3.5 h-3.5 inline sort-icon"></i></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td><input type="checkbox" class="checkbox checkbox-sm" data-row-checkbox checked /></td><td>EMP-10024</td><td>Alicia Ferreira</td><td>100024</td><td>Toronto, ON</td><td>Canada</td><td><span class="badge badge-success badge-sm">Active</span></td><td>FT</td><td>&mdash;</td><td><span class="badge badge-success badge-sm">Passed</span></td></tr>
+            <tr><td><input type="checkbox" class="checkbox checkbox-sm" data-row-checkbox checked /></td><td>EMP-10031</td><td>Marcus Lindqvist</td><td>100031</td><td>London, UK</td><td>United Kingdom</td><td><span class="badge badge-success badge-sm">Active</span></td><td>FT</td><td>&mdash;</td><td><span class="badge badge-warning badge-sm">Warning</span></td></tr>
+            <tr><td><input type="checkbox" class="checkbox checkbox-sm" data-row-checkbox checked /></td><td>EMP-10045</td><td>Wei Chen</td><td>100045</td><td>Singapore</td><td>Singapore</td><td><span class="badge badge-warning badge-sm">On Leave</span></td><td>FT</td><td>2026-10-01</td><td><span class="badge badge-success badge-sm">Passed</span></td></tr>
+            <tr><td><input type="checkbox" class="checkbox checkbox-sm" data-row-checkbox /></td><td>EMP-10052</td><td>Sofia Ramirez</td><td>100052</td><td>São Paulo, BR</td><td>Brazil</td><td><span class="badge badge-error badge-sm">Terminated</span></td><td>CT</td><td>2026-08-31</td><td><span class="badge badge-error badge-sm">Failed</span></td></tr>
+            <tr><td><input type="checkbox" class="checkbox checkbox-sm" data-row-checkbox checked /></td><td>EMP-10067</td><td>Priya Natarajan</td><td>100067</td><td>Toronto, ON</td><td>Canada</td><td><span class="badge badge-success badge-sm">Active</span></td><td>FT</td><td>&mdash;</td><td><span class="badge badge-success badge-sm">Passed</span></td></tr>
+            <tr><td><input type="checkbox" class="checkbox checkbox-sm" data-row-checkbox checked /></td><td>EMP-10078</td><td>David Okonkwo</td><td>100078</td><td>London, UK</td><td>United Kingdom</td><td><span class="badge badge-success badge-sm">Active</span></td><td>PT</td><td>&mdash;</td><td><span class="badge badge-success badge-sm">Passed</span></td></tr>
+            <tr><td><input type="checkbox" class="checkbox checkbox-sm" data-row-checkbox /></td><td>EMP-10089</td><td>Emma Johansson</td><td>100089</td><td>Singapore</td><td>Singapore</td><td><span class="badge badge-warning badge-sm">On Leave</span></td><td>FT</td><td>2026-09-20</td><td><span class="badge badge-warning badge-sm">Warning</span></td></tr>
+            <tr><td><input type="checkbox" class="checkbox checkbox-sm" data-row-checkbox checked /></td><td>EMP-10093</td><td>Carlos Mendoza</td><td>100093</td><td>São Paulo, BR</td><td>Brazil</td><td><span class="badge badge-success badge-sm">Active</span></td><td>FT</td><td>&mdash;</td><td><span class="badge badge-success badge-sm">Passed</span></td></tr>
+          </tbody>
+        </table>
       </div>
     </main>
   </div>
