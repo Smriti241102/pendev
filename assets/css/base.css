@@ -1,0 +1,250 @@
+@import "tailwindcss";
+ 
+/* optional: keep the bundles out of Tailwind's class scan */
+@source not "./daisyui{,*}.v5.mjs";
+@plugin "./daisyui.v5.mjs" {
+    themes: false;
+}
+ 
+[x-cloak] {
+    display: none !important;
+}
+ 
+#external-data
+    #refresh-external-data-button-container.htmx-request
+    #refresh-external-data-button {
+    display: none;
+}
+ 
+#external-data
+    #refresh-external-data-button-container
+    #refresh-external-data-button {
+    display: initial;
+}
+ 
+#external-data
+    #refresh-external-data-button-container
+    #refresh-external-data-button-spinner {
+    display: none;
+}
+ 
+#external-data
+    #refresh-external-data-button-container.htmx-request
+    #refresh-external-data-button-spinner {
+    display: flex;
+}
+ 
+#profile-template-settings
+    #spinner{
+        display:none;
+    }
+ 
+#profile-template-settings
+    #text{
+        display:flex;
+    }
+ 
+#profile-template-settings
+    #template-footer.htmx-request
+    #spinner{
+        display:flex;
+    }
+ 
+    #profile-template-settings
+    #template-footer.htmx-request
+    #text{
+        display:none;
+    }
+ 
+#mypopover {
+    bottom: anchor(bottom);
+    left: anchor(center);
+    translate: -50% 0;
+}
+
+
+@keyframes fade-in {
+    from { opacity: 0; }
+}
+ 
+@keyframes fade-out {
+    to { opacity: 0; }
+}
+ 
+@keyframes slide-from-right {
+    from { transform: translateX(90px); }
+}
+ 
+@keyframes slide-to-left {
+    to { transform: translateX(-90px); }
+}
+ 
+.slide-it {
+    view-transition-name: slide-it;
+}
+ 
+::view-transition-old(slide-it) {
+    animation: 180ms cubic-bezier(0.4, 0, 1, 1) both fade-out,
+    600ms cubic-bezier(0.4, 0, 0.2, 1) both slide-to-left;
+}
+::view-transition-new(slide-it) {
+    animation: 420ms cubic-bezier(0, 0, 0.2, 1) 90ms both fade-in,
+    600ms cubic-bezier(0.4, 0, 0.2, 1) both slide-from-right;
+}
+ 
+dialog::backdrop {
+    background: rgba(0, 0, 0, 0.75);
+}
+ 
+/* Custom DaisyUI Themes */
+@theme{
+    /* Example: Define a new named palette entry here, and then optionally set again to customize in each theme */
+    /* --color-stantec: #ED6631; */
+}
+@plugin "./daisyui-theme.v5.mjs" {
+    name: "ctk-light";
+    default: true;
+    prefersdark: false;
+    color-scheme: "light";
+ 
+    /* Backgrounds */
+    --color-base-100: oklch(99% 0.004 255);
+    --color-base-200: #f1f6fd;
+    --color-base-300: #dceafb;
+    --color-base-content: #1f3a53;
+ 
+    /* Primary */
+    --color-primary: oklch(0.75 0.07 250.14);
+    --color-primary-content: white;
+ 
+    /* Secondary */
+    --color-secondary: oklch(68.011% 0.158 276.934);
+    --color-secondary-content: oklch(13.602% 0.031 276.934);
+ 
+    /* Accent */
+    --color-accent: oklch(72.36% 0.176 350.048);
+    --color-accent-content: oklch(14.472% 0.035 350.048);
+ 
+    /* Neutral */
+    --color-neutral: oklch(27.949% 0.036 260.03);
+    --color-neutral-content: oklch(85.589% 0.007 260.03);
+ 
+    /* Status */
+    --color-info: oklch(68.475% 0.094 217.284);
+    --color-info-content: white;
+ 
+    --color-success: oklch(78.452% 0.132 181.911);
+    --color-success-content: oklch(15.69% 0.026 181.911);
+ 
+    --color-warning: oklch(83.242% 0.139 82.95);
+    --color-warning-content: oklch(16.648% 0.027 82.95);
+ 
+    --color-error: oklch(71.785% 0.17 13.118);
+    --color-error-content: oklch(14.357% 0.034 13.118);
+ 
+    /* Shape */
+    --radius-selector: 0.6rem;
+    --radius-field: 0.75rem;
+    --radius-box: 1rem;
+ 
+    /* Controls */
+    --size-selector: 0.25rem;
+    --size-field: 0.25rem;
+ 
+    /* Borders */
+    --border: 1px;
+ 
+    /* Other */
+    --depth: 1;
+    --noise: 1;
+}
+ 
+@plugin "./daisyui-theme.v5.mjs" {
+    name: "ctk-dark";
+    default: false;
+    prefersdark: true;
+    color-scheme: "dark";
+ 
+    /* Backgrounds */
+    --color-base-100: oklch(24% 0.039 265.754);
+    --color-base-200: oklch(21% 0.037 265.754);
+    --color-base-300: oklch(19% 0.034 265.754);
+    --color-base-content: oklch(84.153% 0.007 265.754);
+ 
+    /* Primary */
+    --color-primary: oklch(0.75 0.07 250.14);
+    --color-primary-content: oklch(15.07% 0.027 232.661);
+ 
+    /* Secondary */
+    --color-secondary: oklch(68.011% 0.158 276.934);
+    --color-secondary-content: oklch(13.602% 0.031 276.934);
+ 
+    /* Accent */
+    --color-accent: oklch(72.36% 0.176 350.048);
+    --color-accent-content: oklch(14.472% 0.035 350.048);
+ 
+    /* Neutral */
+    --color-neutral: oklch(27.949% 0.036 260.03);
+    --color-neutral-content: oklch(85.589% 0.007 260.03);
+ 
+    /* Status */
+    --color-info: oklch(68.475% 0.094 217.284);
+    --color-info-content: oklch(13.695% 0.018 217.284);
+ 
+    --color-success: oklch(78.452% 0.132 181.911);
+    --color-success-content: oklch(15.69% 0.026 181.911);
+ 
+    --color-warning: oklch(83.242% 0.139 82.95);
+    --color-warning-content: oklch(16.648% 0.027 82.95);
+ 
+    --color-error: oklch(71.785% 0.17 13.118);
+    --color-error-content: oklch(14.357% 0.034 13.118);
+ 
+    /* Shape */
+    --radius-selector: 0.6rem;
+    --radius-field: 0.75rem;
+    --radius-box: 1rem;
+ 
+    /* Controls */
+    --size-selector: 0.25rem;
+    --size-field: 0.25rem;
+ 
+    /* Borders */
+    --border: 1px;
+ 
+    /* Other */
+    --depth: 1;
+    --noise: 1;
+}
+/* Forces "dark:" prefixes to be based on whether the "ctk-dark" theme is active */
+@custom-variant dark (&:where([data-theme="ctk-dark"], [data-theme="ctk-dark"] *));
+ 
+/* Custom component classes */
+ 
+/* Custom alert that uses the base background to more smoothly blend-in with other cards */
+@utility alert-base {
+    @apply border-1 border-base-300 !bg-base-200 shadow-none;
+}
+ 
+/* Wrap around a raw FontAwesome icon SVG to keep it consistently sized in the side-nav */
+@utility side-nav-icon {
+    @apply my-1.5 inline-flex items-center justify-center size-4 shrink-0 [&>svg]:max-h-full [&>svg]:max-w-full [&>svg]:fill-current;
+}
+ 
+/* Shared page structure for title, subtitle, and a toolbar for possible controls at the end */
+@utility page-toolbar {
+    @apply my-2 mb-4;
+ 
+    @apply flex flex-col gap-4;
+ 
+    @apply md:flex-row md:items-center md:justify-between md:gap-0;
+}
+@utility page-title {
+    @apply uppercase tracking-wider text-xs;
+}
+@utility page-subtitle {
+    @apply text-2xl font-bold tracking-wide
+}
+@utility page-controls {
+    @apply flex justify-end gap-2;
+}
