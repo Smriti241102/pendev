@@ -15,12 +15,17 @@
 <div class="flex h-screen overflow-hidden">
   <!-- ============ SIDEBAR (partials/sidebar.html) ============ -->
   <aside id="sidebar" class="bg-base-200 border-r border-base-300 h-screen flex flex-col shrink-0 transition-all duration-300 ease-in-out">
-    <div class="h-16 flex items-center gap-2 px-4 border-b border-base-300 shrink-0">
-      <div class="w-9 h-9 rounded-lg bg-primary text-primary-content flex items-center justify-center font-bold shrink-0">HR</div>
-      <span id="sidebarBrandText" class="leading-tight">
-        <span class="block font-semibold text-base">HR Acquisition</span>
-        <span class="block text-xs font-normal text-base-content/60">Administration</span>
-      </span>
+    <div class="sidebar-topbar h-16 flex items-center justify-between gap-2 px-4 border-b border-base-300 shrink-0">
+      <div class="sidebar-logo flex items-center gap-2 min-w-0">
+        <div class="w-9 h-9 rounded-lg bg-primary text-primary-content flex items-center justify-center font-bold shrink-0">HR</div>
+        <span id="sidebarBrandText" class="leading-tight">
+          <span class="block font-semibold text-base">HR Acquisition</span>
+          <span class="block text-xs font-normal text-base-content/60">Administration</span>
+        </span>
+      </div>
+      <button id="sidebarToggle" class="btn btn-ghost btn-circle btn-sm shrink-0" aria-label="Toggle sidebar">
+        <i id="sidebarToggleIcon" data-lucide="menu" class="w-5 h-5"></i>
+      </button>
     </div>
     <nav class="flex-1 overflow-y-auto scroll-thin py-4 px-2 space-y-1">
       <a href="index.html" class="nav-link px-3 py-2.5 rounded-lg text-sm font-medium text-base-content/70 hover:bg-base-300 hover:text-primary tooltip tooltip-right" data-tip="Company">
@@ -45,11 +50,6 @@
         <i data-lucide="shield" class="w-5 h-5 shrink-0"></i><span class="sidebar-label">Administrator</span>
       </a>
     </nav>
-    <div class="border-t border-base-300 p-2">
-      <button id="sidebarToggle" class="nav-link w-full px-3 py-2.5 rounded-lg text-sm font-medium text-base-content/70 hover:bg-base-300">
-        <i id="sidebarToggleIcon" data-lucide="chevron-left" class="w-5 h-5 shrink-0"></i><span class="sidebar-label">Collapse</span>
-      </button>
-    </div>
   </aside>
 
   <div class="flex-1 flex flex-col overflow-hidden">
@@ -237,6 +237,15 @@
         </div>
       </div>
     </main>
+    <div class="mt-auto">
+      <div class="flex flex-col items-center justify-center text-center text-sm font-medium text-base-content/50 sm:flex-row sm:gap-2 py-3">
+        <span>Compensation Toolkit</span>
+        <span class="hidden sm:inline" aria-hidden="true">·</span>
+        <span>vNIGHTLY</span>
+        <span class="hidden sm:inline" aria-hidden="true">·</span>
+        <span>Built by Stantec Software Solutions</span>
+      </div>
+    </div>
   </div>
 </div>
 
