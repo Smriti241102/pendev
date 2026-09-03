@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="ctk-light">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Employee Management · HR Acquisition Administration</title>
+<script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+<link href="https://cdn.jsdelivr.net/npm/daisyui@5" rel="stylesheet" type="text/css" />
+<script src="https://unpkg.com/lucide@latest"></script>
+<link rel="stylesheet" href="assets/css/theme.css" />
+<link rel="stylesheet" href="assets/css/custom.css" />
+</head>
+<body class="bg-base-100 text-base-content">
+
+<div class="flex h-screen overflow-hidden">
+  <!-- ============ SIDEBAR (partials/sidebar.html) ============ -->
+  <aside id="sidebar" class="bg-base-200 border-r border-base-300 h-screen flex flex-col shrink-0 transition-all duration-300 ease-in-out">
+    <div class="h-16 flex items-center gap-2 px-4 border-b border-base-300 shrink-0">
+      <div class="w-9 h-9 rounded-lg bg-primary text-primary-content flex items-center justify-center font-bold shrink-0">HR</div>
+      <span id="sidebarBrandText" class="leading-tight">
+        <span class="block font-semibold text-base">HR Acquisition</span>
+        <span class="block text-xs font-normal text-base-content/60">Administration</span>
+      </span>
+    </div>
+    <nav class="flex-1 overflow-y-auto scroll-thin py-4 px-2 space-y-1">
+      <a href="index.html" class="nav-link px-3 py-2.5 rounded-lg text-sm font-medium text-base-content/70 hover:bg-base-300 hover:text-primary tooltip tooltip-right" data-tip="Company">
+        <i data-lucide="building-2" class="w-5 h-5 shrink-0"></i><span class="sidebar-label">Company</span>
+      </a>
+      <a href="employees.html" class="nav-link px-3 py-2.5 rounded-lg text-sm font-medium bg-base-300 text-base-content tooltip tooltip-right" data-tip="Employees">
+        <i data-lucide="users" class="w-5 h-5 shrink-0"></i><span class="sidebar-label">Employees</span>
+      </a>
+      <a href="import-data.html" class="nav-link px-3 py-2.5 rounded-lg text-sm font-medium text-base-content/70 hover:bg-base-300 hover:text-primary tooltip tooltip-right" data-tip="Import Data">
+        <i data-lucide="upload" class="w-5 h-5 shrink-0"></i><span class="sidebar-label">Import Data</span>
+      </a>
+      <a href="batch-processing.html" class="nav-link px-3 py-2.5 rounded-lg text-sm font-medium text-base-content/70 hover:bg-base-300 hover:text-primary tooltip tooltip-right" data-tip="Batch Processing">
+        <i data-lucide="layers" class="w-5 h-5 shrink-0"></i><span class="sidebar-label">Batch Processing</span>
+      </a>
+      <a href="reports.html" class="nav-link px-3 py-2.5 rounded-lg text-sm font-medium text-base-content/70 hover:bg-base-300 hover:text-primary tooltip tooltip-right" data-tip="Reports">
+        <i data-lucide="bar-chart-3" class="w-5 h-5 shrink-0"></i><span class="sidebar-label">Reports</span>
+      </a>
+      <a href="administrator.html" class="nav-link px-3 py-2.5 rounded-lg text-sm font-medium text-base-content/70 hover:bg-base-300 hover:text-primary tooltip tooltip-right" data-tip="Administrator">
+        <i data-lucide="shield" class="w-5 h-5 shrink-0"></i><span class="sidebar-label">Administrator</span>
+      </a>
+    </nav>
+    <div class="border-t border-base-300 p-2">
+      <button id="sidebarToggle" class="nav-link w-full px-3 py-2.5 rounded-lg text-sm font-medium text-base-content/70 hover:bg-base-300">
+        <i id="sidebarToggleIcon" data-lucide="chevron-left" class="w-5 h-5 shrink-0"></i><span class="sidebar-label">Collapse</span>
+      </button>
+    </div>
+  </aside>
+
+  <div class="flex-1 flex flex-col overflow-hidden">
+    <!-- ============ HEADER (partials/header.html) ============ -->
+    <header class="shrink-0 px-4 lg:px-6 pt-4">
+      <div class="card bg-base-200 border border-base-300 shadow-sm rounded-box">
+      <div class="card-body py-3 px-4 flex-row flex-wrap items-center justify-between gap-3">
+        <div class="flex flex-wrap items-end gap-2 min-w-0">
+          <label class="form-control">
+            <span class="label-text text-xs px-0.5 pb-1">Company Name</span>
+            <div class="dropdown">
+              <div tabindex="0" role="button" class="input input-bordered input-sm w-56 flex items-center justify-between gap-2 cursor-pointer">
+                <span class="truncate font-medium">Stantec Consulting Ltd.</span>
+                <i data-lucide="chevrons-up-down" class="w-3.5 h-3.5 opacity-50 shrink-0"></i>
+              </div>
+              <ul tabindex="0" class="dropdown-content menu bg-base-100 border border-base-300 rounded-box z-[100] mt-2 w-72 p-2 shadow-md">
+                <li class="menu-title">Switch Company</li>
+                <li><a class="flex items-center justify-between font-semibold text-primary"><span class="truncate">Stantec Consulting Ltd.</span><span class="badge badge-ghost badge-sm">STN-CA-001</span></a></li>
+                <li><a class="flex items-center justify-between"><span class="truncate">Stantec Consulting Services Inc.</span><span class="badge badge-ghost badge-sm">STN-US-002</span></a></li>
+                <li><a class="flex items-center justify-between"><span class="truncate">Stantec UK Ltd.</span><span class="badge badge-ghost badge-sm">STN-UK-003</span></a></li>
+                <li><a class="flex items-center justify-between"><span class="truncate">TargetCo Asia Pacific Pte. Ltd.</span><span class="badge badge-ghost badge-sm">TGT-SG-010</span></a></li>
+              </ul>
+            </div>
+          </label>
+          <button class="btn btn-sm btn-outline" data-toast="New company wizard started (UI only)">
+            <i data-lucide="plus" class="w-4 h-4"></i>New Company
+          </button>
+        </div>
+        <div class="flex items-center gap-2">
+          <div class="rounded-lg bg-base-100 border border-base-300 p-1">
+            <div class="dropdown dropdown-end">
+              <button tabindex="0" class="btn btn-ghost btn-circle btn-sm">
+                <div class="indicator">
+                  <i data-lucide="bell" class="w-5 h-5"></i>
+                  <span class="badge badge-xs badge-error indicator-item"></span>
+                </div>
+              </button>
+              <div tabindex="0" class="dropdown-content z-[50] mt-2 card card-compact w-80 bg-base-100 shadow-xl border border-base-300">
+                <div class="card-body">
+                  <span class="font-semibold text-sm">Notifications</span>
+                  <ul class="mt-1 divide-y divide-base-300 text-sm">
+                    <li class="py-2"><p class="font-medium">New hire onboarding due</p><p class="text-base-content/60 text-xs">5 employees pending status confirmation</p></li>
+                    <li class="py-2"><p class="font-medium">Manager reassignment</p><p class="text-base-content/60 text-xs">3 employees awaiting new manager approval</p></li>
+                  </ul>
+                  <button class="btn btn-sm btn-ghost mt-2">View all</button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="rounded-lg bg-base-100 border border-base-300 p-1">
+            <div class="dropdown dropdown-end">
+              <button tabindex="0" class="btn btn-ghost btn-sm gap-1">
+                <i data-lucide="globe" class="w-4 h-4"></i><span class="hidden sm:inline">EN</span>
+              </button>
+              <ul tabindex="0" class="dropdown-content z-[50] menu mt-2 p-2 shadow-xl bg-base-100 border border-base-300 rounded-box w-40">
+                <li><a>English (US)</a></li>
+                <li><a>Français (CA)</a></li>
+                <li><a>Español (MX)</a></li>
+                <li><a>Deutsch (DE)</a></li>
+              </ul>
+            </div>
+          </div>
+          <div class="rounded-lg bg-base-100 border border-base-300 p-1">
+            <label class="btn btn-ghost btn-circle swap swap-rotate" aria-label="Toggle dark mode">
+              <input id="themeToggle" type="checkbox" class="theme-controller" value="ctk-dark" />
+              <i data-lucide="sun" class="swap-off w-5 h-5"></i>
+              <i data-lucide="moon" class="swap-on w-5 h-5"></i>
+            </label>
+          </div>
+          <div class="rounded-lg bg-base-100 border border-base-300 p-1">
+            <div class="dropdown dropdown-end">
+              <button tabindex="0" class="btn btn-ghost btn-sm gap-2 pl-1 pr-2">
+                <div class="avatar placeholder">
+                  <div class="bg-primary text-primary-content rounded-full w-8"><span class="text-xs">JD</span></div>
+                </div>
+                <span class="hidden lg:inline text-sm font-medium">Jordan Delgado</span>
+                <i data-lucide="chevron-down" class="w-4 h-4 hidden lg:inline"></i>
+              </button>
+              <ul tabindex="0" class="dropdown-content z-[50] menu mt-2 p-2 shadow-xl bg-base-100 border border-base-300 rounded-box w-52">
+                <li class="menu-title text-xs">Jordan Delgado · HR Administrator</li>
+                <li><a><i data-lucide="user" class="w-4 h-4"></i>My Profile</a></li>
+                <li><a><i data-lucide="settings" class="w-4 h-4"></i>Preferences</a></li>
+                <li><a><i data-lucide="log-out" class="w-4 h-4"></i>Sign Out</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+      </div>
+    </header>
+
+    <!-- ============ PAGE CONTENT (pages/employees.html) ============ -->
+    <div class="drawer drawer-end flex-1 overflow-hidden">
+      <input id="employeeDrawer" type="checkbox" class="drawer-toggle" />
+      <div class="drawer-content h-full overflow-y-auto scroll-thin p-4 lg:p-6">
+        <div class="page-toolbar">
+          <div>
+            <p class="page-title">Employees</p>
+            <h1 class="page-subtitle">Employee Management</h1>
+          </div>
+        </div>
+        <p class="text-base-content/60 text-sm -mt-2 mb-4">Manage employee master data across all business centers and locations.</p>
+
+        <!-- Toolbar -->
+        <div class="card bg-base-200 border border-base-300 shadow-sm mb-4">
+          <div class="card-body py-4">
+            <div class="flex flex-wrap items-end gap-3">
+              <label class="form-control w-full sm:w-64">
+                <span class="label-text text-xs mb-1">Search Employee</span>
+                <label class="input input-bordered input-sm flex items-center gap-2">
+                  <i data-lucide="search" class="w-4 h-4 opacity-50"></i>
+                  <input type="text" class="grow" placeholder="Name, ID, or email" data-filter-target="table-employees" />
+                </label>
+              </label>
+              <label class="form-control w-full sm:w-44">
+                <span class="label-text text-xs mb-1">Status</span>
+                <select class="select select-bordered select-sm">
+                  <option>All Statuses</option>
+                  <option>Active</option>
+                  <option>On Leave</option>
+                  <option>Terminated</option>
+                  <option>Pending</option>
+                </select>
+              </label>
+              <label class="form-control w-full sm:w-52">
+                <span class="label-text text-xs mb-1">Business Center</span>
+                <select class="select select-bordered select-sm">
+                  <option>All Business Centers</option>
+                  <option>BC-100 · Corporate HQ</option>
+                  <option>BC-200 · EMEA Operations</option>
+                  <option>BC-300 · APAC Shared Services</option>
+                  <option>BC-400 · LATAM Delivery</option>
+                </select>
+              </label>
+              <label class="form-control w-full sm:w-52">
+                <span class="label-text text-xs mb-1">Location</span>
+                <select class="select select-bordered select-sm">
+                  <option>All Locations</option>
+                  <option>Toronto, ON</option>
+                  <option>London, UK</option>
+                  <option>Singapore</option>
+                  <option>São Paulo, BR</option>
+                </select>
+              </label>
+              <div class="grow"></div>
+              <label for="employeeDrawer" class="btn btn-sm btn-primary">
+                <i data-lucide="user-plus" class="w-4 h-4"></i>Add Employee
+              </label>
+            </div>
+          </div>
+        </div>
+
+        <!-- Employee Table -->
+        <div class="overflow-x-auto rounded-box border border-base-300 bg-base-200">
+          <table class="table table-zebra" id="table-employees">
+            <thead>
+              <tr>
+                <th data-sort-key>Employee ID <i data-lucide="chevrons-up-down" class="w-3.5 h-3.5 inline sort-icon"></i></th>
+                <th data-sort-key>First Name <i data-lucide="chevrons-up-down" class="w-3.5 h-3.5 inline sort-icon"></i></th>
+                <th data-sort-key>Last Name <i data-lucide="chevrons-up-down" class="w-3.5 h-3.5 inline sort-icon"></i></th>
+                <th data-sort-key>Email <i data-lucide="chevrons-up-down" class="w-3.5 h-3.5 inline sort-icon"></i></th>
+                <th data-sort-key>Business Center <i data-lucide="chevrons-up-down" class="w-3.5 h-3.5 inline sort-icon"></i></th>
+                <th data-sort-key>Department <i data-lucide="chevrons-up-down" class="w-3.5 h-3.5 inline sort-icon"></i></th>
+                <th data-sort-key>Location <i data-lucide="chevrons-up-down" class="w-3.5 h-3.5 inline sort-icon"></i></th>
+                <th data-sort-key>Status <i data-lucide="chevrons-up-down" class="w-3.5 h-3.5 inline sort-icon"></i></th>
+                <th class="text-right">Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="cursor-pointer hover:bg-base-200/70" data-open-drawer="employeeDrawer">
+                <td>EMP-10024</td><td>Alicia</td><td>Ferreira</td><td>alicia.ferreira@stantec.com</td>
+                <td>BC-100</td><td>Human Resources</td><td>Toronto, ON</td>
+                <td><span class="badge badge-success badge-sm">Active</span></td>
+                <td class="text-right space-x-1">
+                  <label for="employeeDrawer" class="btn btn-ghost btn-xs"><i data-lucide="eye" class="w-4 h-4"></i></label>
+                  <label for="employeeDrawer" class="btn btn-ghost btn-xs"><i data-lucide="pencil" class="w-4 h-4"></i></label>
+                  <button class="btn btn-ghost btn-xs text-error"><i data-lucide="trash-2" class="w-4 h-4"></i></button>
+                </td>
+              </tr>
+              <tr class="cursor-pointer hover:bg-base-200/70" data-open-drawer="employeeDrawer">
+                <td>EMP-10031</td><td>Marcus</td><td>Lindqvist</td><td>marcus.lindqvist@stantec.com</td>
+                <td>BC-200</td><td>Finance</td><td>London, UK</td>
+                <td><span class="badge badge-success badge-sm">Active</span></td>
+                <td class="text-right space-x-1">
+                  <label for="employeeDrawer" class="btn btn-ghost btn-xs"><i data-lucide="eye" class="w-4 h-4"></i></label>
+                  <label for="employeeDrawer" class="btn btn-ghost btn-xs"><i data-lucide="pencil" class="w-4 h-4"></i></label>
+                  <button class="btn btn-ghost btn-xs text-error"><i data-lucide="trash-2" class="w-4 h-4"></i></button>
+                </td>
+              </tr>
+              <tr class="cursor-pointer hover:bg-base-200/70" data-open-drawer="employeeDrawer">
+                <td>EMP-10045</td><td>Wei</td><td>Chen</td><td>wei.chen@stantec.com</td>
+                <td>BC-300</td><td>Engineering</td><td>Singapore</td>
+                <td><span class="badge badge-warning badge-sm">On Leave</span></td>
+                <td class="text-right space-x-1">
+                  <label for="employeeDrawer" class="btn btn-ghost btn-xs"><i data-lucide="eye" class="w-4 h-4"></i></label>
+                  <label for="employeeDrawer" class="btn btn-ghost btn-xs"><i data-lucide="pencil" class="w-4 h-4"></i></label>
+                  <button class="btn btn-ghost btn-xs text-error"><i data-lucide="trash-2" class="w-4 h-4"></i></button>
+                </td>
+              </tr>
+              <tr class="cursor-pointer hover:bg-base-200/70" data-open-drawer="employeeDrawer">
+                <td>EMP-10052</td><td>Sofia</td><td>Ramirez</td><td>sofia.ramirez@stantec.com</td>
+                <td>BC-400</td><td>Operations</td><td>São Paulo, BR</td>
+                <td><span class="badge badge-success badge-sm">Active</span></td>
+                <td class="text-right space-x-1">
+                  <label for="employeeDrawer" class="btn btn-ghost btn-xs"><i data-lucide="eye" class="w-4 h-4"></i></label>
+                  <label for="employeeDrawer" class="btn btn-ghost btn-xs"><i data-lucide="pencil" class="w-4 h-4"></i></label>
+                  <button class="btn btn-ghost btn-xs text-error"><i data-lucide="trash-2" class="w-4 h-4"></i></button>
+                </td>
+              </tr>
+              <tr class="cursor-pointer hover:bg-base-200/70" data-open-drawer="employeeDrawer">
+                <td>EMP-10067</td><td>Priya</td><td>Natarajan</td><td>priya.natarajan@stantec.com</td>
+                <td>BC-100</td><td>Legal</td><td>Toronto, ON</td>
+                <td><span class="badge badge-ghost badge-sm">Pending</span></td>
+                <td class="text-right space-x-1">
+                  <label for="employeeDrawer" class="btn btn-ghost btn-xs"><i data-lucide="eye" class="w-4 h-4"></i></label>
+                  <label for="employeeDrawer" class="btn btn-ghost btn-xs"><i data-lucide="pencil" class="w-4 h-4"></i></label>
+                  <button class="btn btn-ghost btn-xs text-error"><i data-lucide="trash-2" class="w-4 h-4"></i></button>
+                </td>
+              </tr>
+              <tr class="cursor-pointer hover:bg-base-200/70" data-open-drawer="employeeDrawer">
+                <td>EMP-10078</td><td>David</td><td>Okonkwo</td><td>david.okonkwo@stantec.com</td>
+                <td>BC-200</td><td>Business Development</td><td>London, UK</td>
+                <td><span class="badge badge-success badge-sm">Active</span></td>
+                <td class="text-right space-x-1">
+                  <label for="employeeDrawer" class="btn btn-ghost btn-xs"><i data-lucide="eye" class="w-4 h-4"></i></label>
+                  <label for="employeeDrawer" class="btn btn-ghost btn-xs"><i data-lucide="pencil" class="w-4 h-4"></i></label>
+                  <button class="btn btn-ghost btn-xs text-error"><i data-lucide="trash-2" class="w-4 h-4"></i></button>
+                </td>
+              </tr>
+              <tr class="cursor-pointer hover:bg-base-200/70" data-open-drawer="employeeDrawer">
+                <td>EMP-10089</td><td>Emma</td><td>Johansson</td><td>emma.johansson@stantec.com</td>
+                <td>BC-300</td><td>Engineering</td><td>Singapore</td>
+                <td><span class="badge badge-error badge-sm">Terminated</span></td>
+                <td class="text-right space-x-1">
+                  <label for="employeeDrawer" class="btn btn-ghost btn-xs"><i data-lucide="eye" class="w-4 h-4"></i></label>
+                  <label for="employeeDrawer" class="btn btn-ghost btn-xs"><i data-lucide="pencil" class="w-4 h-4"></i></label>
+                  <button class="btn btn-ghost btn-xs text-error"><i data-lucide="trash-2" class="w-4 h-4"></i></button>
+                </td>
+              </tr>
+              <tr class="cursor-pointer hover:bg-base-200/70" data-open-drawer="employeeDrawer">
+                <td>EMP-10093</td><td>Carlos</td><td>Mendoza</td><td>carlos.mendoza@stantec.com</td>
+                <td>BC-400</td><td>Human Resources</td><td>São Paulo, BR</td>
+                <td><span class="badge badge-success badge-sm">Active</span></td>
+                <td class="text-right space-x-1">
+                  <label for="employeeDrawer" class="btn btn-ghost btn-xs"><i data-lucide="eye" class="w-4 h-4"></i></label>
+                  <label for="employeeDrawer" class="btn btn-ghost btn-xs"><i data-lucide="pencil" class="w-4 h-4"></i></label>
+                  <button class="btn btn-ghost btn-xs text-error"><i data-lucide="trash-2" class="w-4 h-4"></i></button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="flex items-center justify-between mt-3 text-sm text-base-content/60">
+          <span>Showing 8 of 214 employees</span>
+          <div class="join">
+            <button class="join-item btn btn-sm">«</button>
+            <button class="join-item btn btn-sm btn-active">1</button>
+            <button class="join-item btn btn-sm">2</button>
+            <button class="join-item btn btn-sm">3</button>
+            <button class="join-item btn btn-sm">»</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Drawer side: Add / Edit Employee -->
+      <div class="drawer-side z-[60]">
+        <label for="employeeDrawer" class="drawer-overlay"></label>
+        <div class="bg-base-100 min-h-full w-full max-w-lg flex flex-col shadow-2xl">
+          <div class="flex items-center justify-between gap-3 px-5 h-16 border-b border-base-300 bg-base-200/50 shrink-0">
+            <div class="flex items-center gap-3 min-w-0">
+              <span class="w-9 h-9 rounded-lg bg-primary/10 text-primary flex items-center justify-center shrink-0"><i data-lucide="user-round" class="w-4.5 h-4.5"></i></span>
+              <div class="min-w-0">
+                <h2 class="font-semibold text-base leading-tight">Add / Edit Employee</h2>
+                <p class="text-xs text-base-content/50 leading-tight">Employee ID: EMP-10024</p>
+              </div>
+            </div>
+            <label for="employeeDrawer" class="btn btn-ghost btn-circle btn-sm shrink-0"><i data-lucide="x" class="w-5 h-5"></i></label>
+          </div>
+
+          <div class="flex-1 overflow-y-auto scroll-thin p-5 space-y-6">
+            <!-- Personal Information -->
+            <section>
+              <div class="flex items-center gap-2.5 mb-3">
+                <span class="w-8 h-8 rounded-lg bg-primary/10 text-primary flex items-center justify-center shrink-0"><i data-lucide="id-card" class="w-4 h-4"></i></span>
+                <h3 class="text-sm font-semibold">Personal Information</h3>
+              </div>
+              <div class="rounded-box border border-base-300 bg-base-200/40 p-4 grid grid-cols-2 gap-3">
+                <div class="form-control col-span-1"><label class="label py-1"><span class="label-text text-xs">First Name</span></label><input class="input input-bordered input-sm" value="Alicia" /></div>
+                <div class="form-control col-span-1"><label class="label py-1"><span class="label-text text-xs">Last Name</span></label><input class="input input-bordered input-sm" value="Ferreira" /></div>
+                <div class="form-control col-span-1"><label class="label py-1"><span class="label-text text-xs">Date of Birth</span></label><input type="date" class="input input-bordered input-sm" value="1989-04-12" /></div>
+                <div class="form-control col-span-1"><label class="label py-1"><span class="label-text text-xs">Gender</span></label>
+                  <select class="select select-bordered select-sm">
+                    <option selected>Female</option><option>Male</option><option>Non-binary</option><option>Prefer not to say</option>
+                  </select>
+                </div>
+              </div>
+            </section>
+
+            <!-- Employment Details -->
+            <section>
+              <div class="flex items-center gap-2.5 mb-3">
+                <span class="w-8 h-8 rounded-lg bg-primary/10 text-primary flex items-center justify-center shrink-0"><i data-lucide="briefcase" class="w-4 h-4"></i></span>
+                <h3 class="text-sm font-semibold">Employment Details</h3>
+              </div>
+              <div class="rounded-box border border-base-300 bg-base-200/40 p-4 grid grid-cols-2 gap-3">
+                <div class="form-control col-span-1"><label class="label py-1"><span class="label-text text-xs">Job Title</span></label><input class="input input-bordered input-sm" value="HR Business Partner" /></div>
+                <div class="form-control col-span-1"><label class="label py-1"><span class="label-text text-xs">Department</span></label><input class="input input-bordered input-sm" value="Human Resources" /></div>
+                <div class="form-control col-span-1"><label class="label py-1"><span class="label-text text-xs">Business Center</span></label>
+                  <select class="select select-bordered select-sm">
+                    <option selected>BC-100 · Corporate HQ</option><option>BC-200 · EMEA Operations</option><option>BC-300 · APAC Shared Services</option>
+                  </select>
+                </div>
+                <div class="form-control col-span-1"><label class="label py-1"><span class="label-text text-xs">Hire Date</span></label><input type="date" class="input input-bordered input-sm" value="2021-06-01" /></div>
+                <div class="form-control col-span-2"><label class="label py-1"><span class="label-text text-xs">Employment Type</span></label>
+                  <select class="select select-bordered select-sm">
+                    <option selected>Full-Time</option><option>Part-Time</option><option>Contract</option><option>Intern</option>
+                  </select>
+                </div>
+              </div>
+            </section>
+
+            <!-- Contact Information -->
+            <section>
+              <div class="flex items-center gap-2.5 mb-3">
+                <span class="w-8 h-8 rounded-lg bg-primary/10 text-primary flex items-center justify-center shrink-0"><i data-lucide="phone" class="w-4 h-4"></i></span>
+                <h3 class="text-sm font-semibold">Contact Information</h3>
+              </div>
+              <div class="rounded-box border border-base-300 bg-base-200/40 p-4 grid grid-cols-2 gap-3">
+                <div class="form-control col-span-2"><label class="label py-1"><span class="label-text text-xs">Email</span></label><input type="email" class="input input-bordered input-sm" value="alicia.ferreira@stantec.com" /></div>
+                <div class="form-control col-span-1"><label class="label py-1"><span class="label-text text-xs">Phone</span></label><input class="input input-bordered input-sm" value="+1 416-555-0148" /></div>
+                <div class="form-control col-span-1"><label class="label py-1"><span class="label-text text-xs">Location</span></label>
+                  <select class="select select-bordered select-sm">
+                    <option selected>Toronto, ON</option><option>London, UK</option><option>Singapore</option><option>São Paulo, BR</option>
+                  </select>
+                </div>
+              </div>
+            </section>
+
+            <!-- Manager Information -->
+            <section>
+              <div class="flex items-center gap-2.5 mb-3">
+                <span class="w-8 h-8 rounded-lg bg-primary/10 text-primary flex items-center justify-center shrink-0"><i data-lucide="user-cog" class="w-4 h-4"></i></span>
+                <h3 class="text-sm font-semibold">Manager Information</h3>
+              </div>
+              <div class="rounded-box border border-base-300 bg-base-200/40 p-4 grid grid-cols-2 gap-3">
+                <div class="form-control col-span-2"><label class="label py-1"><span class="label-text text-xs">Reporting Manager</span></label><input class="input input-bordered input-sm" value="Jordan Delgado" /></div>
+                <div class="form-control col-span-1"><label class="label py-1"><span class="label-text text-xs">Manager Employee ID</span></label><input class="input input-bordered input-sm" value="EMP-10002" /></div>
+                <div class="form-control col-span-1"><label class="label py-1"><span class="label-text text-xs">Dotted-Line Manager</span></label><input class="input input-bordered input-sm" value="—" /></div>
+              </div>
+            </section>
+
+            <!-- Status Information -->
+            <section>
+              <div class="flex items-center gap-2.5 mb-3">
+                <span class="w-8 h-8 rounded-lg bg-primary/10 text-primary flex items-center justify-center shrink-0"><i data-lucide="activity" class="w-4 h-4"></i></span>
+                <h3 class="text-sm font-semibold">Status Information</h3>
+              </div>
+              <div class="rounded-box border border-base-300 bg-base-200/40 p-4 grid grid-cols-2 gap-3">
+                <div class="form-control col-span-1"><label class="label py-1"><span class="label-text text-xs">Status</span></label>
+                  <select class="select select-bordered select-sm">
+                    <option selected>Active</option><option>On Leave</option><option>Terminated</option><option>Pending</option>
+                  </select>
+                </div>
+                <div class="form-control col-span-1"><label class="label py-1"><span class="label-text text-xs">Effective Date</span></label><input type="date" class="input input-bordered input-sm" value="2026-01-01" /></div>
+                <div class="form-control col-span-2"><label class="label py-1"><span class="label-text text-xs">Notes</span></label><textarea class="textarea textarea-bordered textarea-sm" rows="2">No outstanding compliance items.</textarea></div>
+              </div>
+            </section>
+          </div>
+
+          <div class="border-t border-base-300 bg-base-200/50 p-4 flex items-center justify-end gap-2 shrink-0">
+            <label for="employeeDrawer" class="btn btn-ghost btn-sm">Cancel</label>
+            <button class="btn btn-outline btn-sm" data-toast="Changes saved">Save</button>
+            <label for="employeeDrawer" class="btn btn-primary btn-sm" data-toast="Employee saved and closed">Save &amp; Close</label>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="toastContainer" class="toast toast-end"></div>
+<script src="assets/js/app.js"></script>
+</body>
+</html>

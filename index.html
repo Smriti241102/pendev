@@ -1,0 +1,692 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="ctk-light">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Company Information · HR Acquisition Administration</title>
+<script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+<link href="https://cdn.jsdelivr.net/npm/daisyui@5" rel="stylesheet" type="text/css" />
+<script src="https://unpkg.com/lucide@latest"></script>
+<link rel="stylesheet" href="assets/css/theme.css" />
+<link rel="stylesheet" href="assets/css/custom.css" />
+</head>
+<body class="bg-base-100 text-base-content">
+
+<div class="flex h-screen overflow-hidden">
+  <!-- ============ SIDEBAR (partials/sidebar.html) ============ -->
+  <aside id="sidebar" class="bg-base-200 border-r border-base-300 h-screen flex flex-col shrink-0 transition-all duration-300 ease-in-out">
+    <div class="h-16 flex items-center gap-2 px-4 border-b border-base-300 shrink-0">
+      <div class="w-9 h-9 rounded-lg bg-primary text-primary-content flex items-center justify-center font-bold shrink-0">HR</div>
+      <span id="sidebarBrandText" class="leading-tight">
+        <span class="block font-semibold text-base">HR Acquisition</span>
+        <span class="block text-xs font-normal text-base-content/60">Administration</span>
+      </span>
+    </div>
+    <nav class="flex-1 overflow-y-auto scroll-thin py-4 px-2 space-y-1">
+      <a href="index.html" class="nav-link px-3 py-2.5 rounded-lg text-sm font-medium bg-base-300 text-base-content tooltip tooltip-right" data-tip="Company">
+        <i data-lucide="building-2" class="w-5 h-5 shrink-0"></i><span class="sidebar-label">Company</span>
+      </a>
+      <a href="employees.html" class="nav-link px-3 py-2.5 rounded-lg text-sm font-medium text-base-content/70 hover:bg-base-300 hover:text-primary tooltip tooltip-right" data-tip="Employees">
+        <i data-lucide="users" class="w-5 h-5 shrink-0"></i><span class="sidebar-label">Employees</span>
+      </a>
+      <a href="import-data.html" class="nav-link px-3 py-2.5 rounded-lg text-sm font-medium text-base-content/70 hover:bg-base-300 hover:text-primary tooltip tooltip-right" data-tip="Import Data">
+        <i data-lucide="upload" class="w-5 h-5 shrink-0"></i><span class="sidebar-label">Import Data</span>
+      </a>
+      <a href="batch-processing.html" class="nav-link px-3 py-2.5 rounded-lg text-sm font-medium text-base-content/70 hover:bg-base-300 hover:text-primary tooltip tooltip-right" data-tip="Batch Processing">
+        <i data-lucide="layers" class="w-5 h-5 shrink-0"></i><span class="sidebar-label">Batch Processing</span>
+      </a>
+      <a href="reports.html" class="nav-link px-3 py-2.5 rounded-lg text-sm font-medium text-base-content/70 hover:bg-base-300 hover:text-primary tooltip tooltip-right" data-tip="Reports">
+        <i data-lucide="bar-chart-3" class="w-5 h-5 shrink-0"></i><span class="sidebar-label">Reports</span>
+      </a>
+      <a href="administrator.html" class="nav-link px-3 py-2.5 rounded-lg text-sm font-medium text-base-content/70 hover:bg-base-300 hover:text-primary tooltip tooltip-right" data-tip="Administrator">
+        <i data-lucide="shield" class="w-5 h-5 shrink-0"></i><span class="sidebar-label">Administrator</span>
+      </a>
+    </nav>
+    <div class="border-t border-base-300 p-2">
+      <button id="sidebarToggle" class="nav-link w-full px-3 py-2.5 rounded-lg text-sm font-medium text-base-content/70 hover:bg-base-300">
+        <i id="sidebarToggleIcon" data-lucide="chevron-left" class="w-5 h-5 shrink-0"></i><span class="sidebar-label">Collapse</span>
+      </button>
+    </div>
+  </aside>
+
+  <div class="flex-1 flex flex-col overflow-hidden">
+    <!-- ============ HEADER (partials/header.html) ============ -->
+    <header class="shrink-0 px-4 lg:px-6 pt-4">
+      <div class="card bg-base-200 border border-base-300 shadow-sm rounded-box">
+      <div class="card-body py-3 px-4 flex-row flex-wrap items-center justify-between gap-3">
+        <div class="flex flex-wrap items-end gap-2 min-w-0">
+          <label class="form-control">
+            <span class="label-text text-xs px-0.5 pb-1">Company Name</span>
+            <div class="dropdown">
+              <div tabindex="0" role="button" class="input input-bordered input-sm w-56 flex items-center justify-between gap-2 cursor-pointer">
+                <span class="truncate font-medium">Stantec Consulting Ltd.</span>
+                <i data-lucide="chevrons-up-down" class="w-3.5 h-3.5 opacity-50 shrink-0"></i>
+              </div>
+              <ul tabindex="0" class="dropdown-content menu bg-base-100 border border-base-300 rounded-box z-[100] mt-2 w-72 p-2 shadow-md">
+                <li class="menu-title">Switch Company</li>
+                <li><a class="flex items-center justify-between font-semibold text-primary"><span class="truncate">Stantec Consulting Ltd.</span><span class="badge badge-ghost badge-sm">STN-CA-001</span></a></li>
+                <li><a class="flex items-center justify-between"><span class="truncate">Stantec Consulting Services Inc.</span><span class="badge badge-ghost badge-sm">STN-US-002</span></a></li>
+                <li><a class="flex items-center justify-between"><span class="truncate">Stantec UK Ltd.</span><span class="badge badge-ghost badge-sm">STN-UK-003</span></a></li>
+                <li><a class="flex items-center justify-between"><span class="truncate">TargetCo Asia Pacific Pte. Ltd.</span><span class="badge badge-ghost badge-sm">TGT-SG-010</span></a></li>
+              </ul>
+            </div>
+          </label>
+          <button class="btn btn-sm btn-outline" data-toast="New company wizard started (UI only)">
+            <i data-lucide="plus" class="w-4 h-4"></i>New Company
+          </button>
+        </div>
+        <div class="flex items-center gap-2">
+          <div class="rounded-lg bg-base-100 border border-base-300 p-1">
+            <div class="dropdown dropdown-end">
+              <button tabindex="0" class="btn btn-ghost btn-circle btn-sm">
+                <div class="indicator">
+                  <i data-lucide="bell" class="w-5 h-5"></i>
+                  <span class="badge badge-xs badge-error indicator-item"></span>
+                </div>
+              </button>
+              <div tabindex="0" class="dropdown-content z-[50] mt-2 card card-compact w-80 bg-base-100 shadow-xl border border-base-300">
+                <div class="card-body">
+                  <span class="font-semibold text-sm">Notifications</span>
+                  <ul class="mt-1 divide-y divide-base-300 text-sm">
+                    <li class="py-2">
+                      <p class="font-medium">Import completed</p>
+                      <p class="text-base-content/60 text-xs">Employee_Master_Aug2026.csv processed successfully</p>
+                    </li>
+                    <li class="py-2">
+                      <p class="font-medium">Batch job flagged 3 errors</p>
+                      <p class="text-base-content/60 text-xs">Data quality check on Business Center EU-100</p>
+                    </li>
+                    <li class="py-2">
+                      <p class="font-medium">Due diligence document expiring</p>
+                      <p class="text-base-content/60 text-xs">NDA_Acquisition_TargetCo.pdf expires in 5 days</p>
+                    </li>
+                  </ul>
+                  <button class="btn btn-sm btn-ghost mt-2">View all</button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="rounded-lg bg-base-100 border border-base-300 p-1">
+            <div class="dropdown dropdown-end">
+              <button tabindex="0" class="btn btn-ghost btn-sm gap-1">
+                <i data-lucide="globe" class="w-4 h-4"></i><span class="hidden sm:inline">EN</span>
+              </button>
+              <ul tabindex="0" class="dropdown-content z-[50] menu mt-2 p-2 shadow-xl bg-base-100 border border-base-300 rounded-box w-40">
+                <li><a>English (US)</a></li>
+                <li><a>Français (CA)</a></li>
+                <li><a>Español (MX)</a></li>
+                <li><a>Deutsch (DE)</a></li>
+              </ul>
+            </div>
+          </div>
+          <div class="rounded-lg bg-base-100 border border-base-300 p-1">
+            <label class="btn btn-ghost btn-circle swap swap-rotate" aria-label="Toggle dark mode">
+              <input id="themeToggle" type="checkbox" class="theme-controller" value="ctk-dark" />
+              <i data-lucide="sun" class="swap-off w-5 h-5"></i>
+              <i data-lucide="moon" class="swap-on w-5 h-5"></i>
+            </label>
+          </div>
+          <div class="rounded-lg bg-base-100 border border-base-300 p-1">
+            <div class="dropdown dropdown-end">
+              <button tabindex="0" class="btn btn-ghost btn-sm gap-2 pl-1 pr-2">
+                <div class="avatar placeholder">
+                  <div class="bg-primary text-primary-content rounded-full w-8">
+                    <span class="text-xs">JD</span>
+                  </div>
+                </div>
+                <span class="hidden lg:inline text-sm font-medium">Jordan Delgado</span>
+                <i data-lucide="chevron-down" class="w-4 h-4 hidden lg:inline"></i>
+              </button>
+              <ul tabindex="0" class="dropdown-content z-[50] menu mt-2 p-2 shadow-xl bg-base-100 border border-base-300 rounded-box w-52">
+                <li class="menu-title text-xs">Jordan Delgado · HR Administrator</li>
+                <li><a><i data-lucide="user" class="w-4 h-4"></i>My Profile</a></li>
+                <li><a><i data-lucide="settings" class="w-4 h-4"></i>Preferences</a></li>
+                <li><a><i data-lucide="log-out" class="w-4 h-4"></i>Sign Out</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+      </div>
+    </header>
+
+    <!-- ============ PAGE CONTENT (pages/company.html) ============ -->
+    <div class="drawer drawer-end flex-1 overflow-hidden">
+      <input id="companyDrawer" type="checkbox" class="drawer-toggle" />
+      <div class="drawer-content h-full overflow-y-auto scroll-thin p-4 lg:p-6">
+      <div class="page-toolbar">
+        <div>
+          <p class="page-title">Company</p>
+          <h1 class="page-subtitle">Company Information - Edit Company Details</h1>
+        </div>
+      </div>
+
+      <!-- Record-level actions -->
+      <div class="flex flex-wrap items-center gap-2 mb-6">
+        <button class="btn btn-sm btn-primary" data-toast="New company record started (UI only)"><i data-lucide="plus" class="w-4 h-4"></i>New</button>
+        <button class="btn btn-sm btn-outline" data-toast="Edit mode enabled">Edit</button>
+        <button class="btn btn-sm btn-outline btn-error" data-toast="Company record deleted (UI only)" data-toast-type="warning"><i data-lucide="trash-2" class="w-4 h-4"></i>Delete</button>
+        <div class="grow"></div>
+        <button class="btn btn-sm btn-ghost" data-toast="Changes saved">Save</button>
+        <button class="btn btn-sm btn-primary" data-toast="Saved and closed">Save &amp; Close</button>
+      </div>
+
+      <!-- Company Details - always visible, not a tab -->
+      <div class="card bg-base-200 border border-base-300 shadow-sm mb-6">
+        <div class="card-body">
+          <div class="flex items-center justify-between">
+            <h2 class="card-title text-base">Company Details</h2>
+          </div>
+          <p class="text-xs text-base-content/50 -mt-1 mb-3">Core company file attributes. This section is not part of the tabbed views below.</p>
+          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-6 gap-y-4">
+            <div class="form-control">
+              <label class="label py-1"><span class="label-text">Company Name</span></label>
+              <input type="text" value="Stantec Consulting Ltd." class="input input-bordered input-sm" />
+            </div>
+            <div class="form-control">
+              <label class="label py-1"><span class="label-text">File Name</span></label>
+              <input type="text" value="STN_CA_001_2026.dat" class="input input-bordered input-sm" />
+            </div>
+            <div class="form-control">
+              <label class="label py-1"><span class="label-text">Stantec Starting Date</span></label>
+              <input type="date" value="2026-01-01" class="input input-bordered input-sm" />
+            </div>
+            <div class="form-control">
+              <label class="label py-1"><span class="label-text">Closing Date</span></label>
+              <input type="date" value="2026-12-31" class="input input-bordered input-sm" />
+            </div>
+            <div class="form-control">
+              <label class="label py-1"><span class="label-text">Earliest WIP Date</span></label>
+              <input type="date" value="2026-01-15" class="input input-bordered input-sm" />
+            </div>
+            <div class="form-control">
+              <label class="label py-1"><span class="label-text">Payroll Date</span></label>
+              <input type="date" value="2026-09-15" class="input input-bordered input-sm" />
+            </div>
+            <div class="form-control">
+              <label class="label py-1"><span class="label-text">Locked</span></label>
+              <label class="flex items-center gap-2 h-9">
+                <input type="checkbox" class="toggle toggle-sm toggle-primary" checked disabled />
+                <span class="text-sm inline-flex items-center gap-1"><i data-lucide="lock" class="w-3.5 h-3.5"></i>Record locked</span>
+              </label>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ===================== TAB NAVIGATION ===================== -->
+      <div role="tablist" class="tabs tabs-lift" data-tabs-group="companyTabs">
+        <a role="tab" class="tab tab-active" data-tab-target="tab-dp">Default Properties</a>
+        <a role="tab" class="tab" data-tab-target="tab-sob">Set Of Books</a>
+        <a role="tab" class="tab" data-tab-target="tab-le">Legal Entities</a>
+        <a role="tab" class="tab" data-tab-target="tab-bt">Benefit Types</a>
+        <a role="tab" class="tab" data-tab-target="tab-bnt">Bonus Types</a>
+        <a role="tab" class="tab" data-tab-target="tab-ll">Local Lookups</a>
+        <a role="tab" class="tab" data-tab-target="tab-dd">Due Diligence</a>
+      </div>
+
+      <div data-tabs-panels="companyTabs" class="bg-base-200 border border-base-300 rounded-b-box rounded-tr-box p-4 lg:p-6 mb-10">
+
+        <!-- ===== Default Properties ===== -->
+        <div id="tab-dp" class="tab-content-panel">
+          <div class="flex flex-wrap items-center gap-2 mb-4">
+            <button class="btn btn-sm btn-primary" data-open-drawer="companyDrawer" data-panel-target="panel-dp"><i data-lucide="plus" class="w-4 h-4"></i>New</button>
+            <button class="btn btn-sm btn-outline" data-open-drawer="companyDrawer" data-panel-target="panel-dp">Edit</button>
+            <button class="btn btn-sm btn-outline btn-error">Delete</button>
+            <button class="btn btn-sm btn-outline" data-toast="Default property values applied"><i data-lucide="wand-2" class="w-4 h-4"></i>Apply Default Property Values</button>
+            <div class="grow"></div>
+            <button class="btn btn-sm btn-ghost" data-toast="Changes saved">Save</button>
+            <button class="btn btn-sm btn-primary" data-toast="Saved and closed">Save &amp; Close</button>
+            <button class="btn btn-sm btn-ghost">Close</button>
+          </div>
+          <label class="input input-bordered input-sm flex items-center gap-2 max-w-xs mb-4">
+            <i data-lucide="search" class="w-4 h-4 opacity-50"></i>
+            <input type="text" class="grow" placeholder="Search default properties" data-filter-target="table-dp" />
+          </label>
+          <div class="overflow-x-auto rounded-box border border-base-300">
+            <table class="table table-zebra" id="table-dp">
+              <thead>
+                <tr>
+                  <th data-sort-key>Property Name <i data-lucide="chevrons-up-down" class="w-3.5 h-3.5 inline sort-icon"></i></th>
+                  <th data-sort-key>Country Name <i data-lucide="chevrons-up-down" class="w-3.5 h-3.5 inline sort-icon"></i></th>
+                  <th data-sort-key>Value <i data-lucide="chevrons-up-down" class="w-3.5 h-3.5 inline sort-icon"></i></th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr class="cursor-pointer hover:bg-base-200/70" data-open-drawer="companyDrawer" data-panel-target="panel-dp"><td>Legal Company Name</td><td>Canada</td><td>Stantec Consulting Ltd.</td></tr>
+                <tr class="cursor-pointer hover:bg-base-200/70" data-open-drawer="companyDrawer" data-panel-target="panel-dp"><td>Currency</td><td>Canada</td><td>CAD - Canadian Dollar</td></tr>
+                <tr class="cursor-pointer hover:bg-base-200/70" data-open-drawer="companyDrawer" data-panel-target="panel-dp"><td>Language</td><td>Canada</td><td>English</td></tr>
+                <tr class="cursor-pointer hover:bg-base-200/70" data-open-drawer="companyDrawer" data-panel-target="panel-dp"><td>Time Zone</td><td>Canada</td><td>(UTC-05:00) Eastern Time</td></tr>
+                <tr class="cursor-pointer hover:bg-base-200/70" data-open-drawer="companyDrawer" data-panel-target="panel-dp"><td>Default Business Center</td><td>Canada</td><td>BC-100 · Corporate HQ</td></tr>
+                <tr class="cursor-pointer hover:bg-base-200/70" data-open-drawer="companyDrawer" data-panel-target="panel-dp"><td>Default Location</td><td>Canada</td><td>Toronto, ON - HQ</td></tr>
+                <tr class="cursor-pointer hover:bg-base-200/70" data-open-drawer="companyDrawer" data-panel-target="panel-dp"><td>Status</td><td>Canada</td><td>Active</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- ===== Set Of Books ===== -->
+        <div id="tab-sob" class="tab-content-panel hidden">
+          <div class="flex flex-wrap items-center gap-2 mb-4">
+            <button class="btn btn-sm btn-primary" data-open-drawer="companyDrawer" data-panel-target="panel-sob"><i data-lucide="plus" class="w-4 h-4"></i>New</button>
+            <button class="btn btn-sm btn-outline" data-open-drawer="companyDrawer" data-panel-target="panel-sob">Edit</button>
+            <button class="btn btn-sm btn-outline btn-error">Delete</button>
+            <div class="grow"></div>
+            <button class="btn btn-sm btn-ghost" data-toast="Changes saved">Save</button>
+            <button class="btn btn-sm btn-primary" data-toast="Saved and closed">Save &amp; Close</button>
+            <button class="btn btn-sm btn-ghost">Close</button>
+          </div>
+          <label class="input input-bordered input-sm flex items-center gap-2 max-w-xs mb-4">
+            <i data-lucide="search" class="w-4 h-4 opacity-50"></i>
+            <input type="text" class="grow" placeholder="Search set of books" data-filter-target="table-sob" />
+          </label>
+          <div class="overflow-x-auto rounded-box border border-base-300">
+            <table class="table table-zebra" id="table-sob">
+              <thead>
+                <tr>
+                  <th data-sort-key>Legal Entity Name <i data-lucide="chevrons-up-down" class="w-3.5 h-3.5 inline sort-icon"></i></th>
+                  <th data-sort-key>Business Center Name <i data-lucide="chevrons-up-down" class="w-3.5 h-3.5 inline sort-icon"></i></th>
+                  <th data-sort-key>Business Line Name <i data-lucide="chevrons-up-down" class="w-3.5 h-3.5 inline sort-icon"></i></th>
+                  <th data-sort-key>Office Location Name <i data-lucide="chevrons-up-down" class="w-3.5 h-3.5 inline sort-icon"></i></th>
+                  <th data-sort-key>Status <i data-lucide="chevrons-up-down" class="w-3.5 h-3.5 inline sort-icon"></i></th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr class="cursor-pointer hover:bg-base-200/70" data-open-drawer="companyDrawer" data-panel-target="panel-sob"><td>Stantec Consulting Ltd.</td><td>Corporate HQ</td><td>Engineering &amp; Design</td><td>Toronto, ON</td><td><span class="badge badge-success badge-sm">Active</span></td></tr>
+                <tr class="cursor-pointer hover:bg-base-200/70" data-open-drawer="companyDrawer" data-panel-target="panel-sob"><td>Stantec Consulting Services Inc.</td><td>EMEA Operations</td><td>Environmental Services</td><td>London, UK</td><td><span class="badge badge-success badge-sm">Active</span></td></tr>
+                <tr class="cursor-pointer hover:bg-base-200/70" data-open-drawer="companyDrawer" data-panel-target="panel-sob"><td>Stantec UK Ltd.</td><td>APAC Shared Services</td><td>Water Resources</td><td>Singapore</td><td><span class="badge badge-success badge-sm">Active</span></td></tr>
+                <tr class="cursor-pointer hover:bg-base-200/70" data-open-drawer="companyDrawer" data-panel-target="panel-sob"><td>Stantec Asia Pacific Pte. Ltd.</td><td>LATAM Delivery</td><td>Transportation</td><td>São Paulo, BR</td><td><span class="badge badge-ghost badge-sm">Inactive</span></td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- ===== Legal Entities ===== -->
+        <div id="tab-le" class="tab-content-panel hidden">
+          <div class="flex flex-wrap items-center gap-2 mb-4">
+            <button class="btn btn-sm btn-primary" data-open-drawer="companyDrawer" data-panel-target="panel-le"><i data-lucide="plus" class="w-4 h-4"></i>New</button>
+            <button class="btn btn-sm btn-outline" data-open-drawer="companyDrawer" data-panel-target="panel-le">Edit</button>
+            <button class="btn btn-sm btn-outline btn-error">Delete</button>
+            <div class="grow"></div>
+            <button class="btn btn-sm btn-ghost" data-toast="Changes saved">Save</button>
+            <button class="btn btn-sm btn-primary" data-toast="Saved and closed">Save &amp; Close</button>
+            <button class="btn btn-sm btn-ghost">Close</button>
+          </div>
+          <label class="input input-bordered input-sm flex items-center gap-2 max-w-xs mb-4">
+            <i data-lucide="search" class="w-4 h-4 opacity-50"></i>
+            <input type="text" class="grow" placeholder="Search legal entities" data-filter-target="table-le" />
+          </label>
+          <div class="overflow-x-auto rounded-box border border-base-300">
+            <table class="table table-zebra" id="table-le">
+              <thead><tr><th>Legal Entities Name</th><th>Pto Vacation</th><th>Status</th></tr></thead>
+              <tbody>
+                <tr class="cursor-pointer hover:bg-base-200/70" data-open-drawer="companyDrawer" data-panel-target="panel-le"><td>Stantec Consulting Ltd.</td><td>15 days</td><td><span class="badge badge-success badge-sm">Active</span></td></tr>
+                <tr class="cursor-pointer hover:bg-base-200/70" data-open-drawer="companyDrawer" data-panel-target="panel-le"><td>Stantec Consulting Services Inc.</td><td>10 days</td><td><span class="badge badge-success badge-sm">Active</span></td></tr>
+                <tr class="cursor-pointer hover:bg-base-200/70" data-open-drawer="companyDrawer" data-panel-target="panel-le"><td>Stantec UK Ltd.</td><td>25 days</td><td><span class="badge badge-success badge-sm">Active</span></td></tr>
+                <tr class="cursor-pointer hover:bg-base-200/70" data-open-drawer="companyDrawer" data-panel-target="panel-le"><td>Stantec Asia Pacific Pte. Ltd.</td><td>14 days</td><td><span class="badge badge-ghost badge-sm">Inactive</span></td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- ===== Benefit Types ===== -->
+        <div id="tab-bt" class="tab-content-panel hidden">
+          <div class="flex flex-wrap items-center gap-2 mb-4">
+            <button class="btn btn-sm btn-primary" data-open-drawer="companyDrawer" data-panel-target="panel-bt"><i data-lucide="plus" class="w-4 h-4"></i>New</button>
+            <button class="btn btn-sm btn-outline" data-open-drawer="companyDrawer" data-panel-target="panel-bt">Edit</button>
+            <button class="btn btn-sm btn-outline btn-error">Delete</button>
+            <button class="btn btn-sm btn-outline" data-toast="Benefit details applied"><i data-lucide="wand-2" class="w-4 h-4"></i>Apply Benefit Details</button>
+            <div class="grow"></div>
+            <button class="btn btn-sm btn-ghost" data-toast="Changes saved">Save</button>
+            <button class="btn btn-sm btn-primary" data-toast="Saved and closed">Save &amp; Close</button>
+            <button class="btn btn-sm btn-ghost">Close</button>
+          </div>
+          <label class="input input-bordered input-sm flex items-center gap-2 max-w-xs mb-4">
+            <i data-lucide="search" class="w-4 h-4 opacity-50"></i>
+            <input type="text" class="grow" placeholder="Search benefit types" data-filter-target="table-bt" />
+          </label>
+          <div class="overflow-x-auto rounded-box border border-base-300">
+            <table class="table table-zebra" id="table-bt">
+              <thead>
+                <tr>
+                  <th data-sort-key>Display Name <i data-lucide="chevrons-up-down" class="w-3.5 h-3.5 inline sort-icon"></i></th>
+                  <th data-sort-key>Default Coverage Level <i data-lucide="chevrons-up-down" class="w-3.5 h-3.5 inline sort-icon"></i></th>
+                  <th data-sort-key>Default Cost <i data-lucide="chevrons-up-down" class="w-3.5 h-3.5 inline sort-icon"></i></th>
+                  <th data-sort-key>Country <i data-lucide="chevrons-up-down" class="w-3.5 h-3.5 inline sort-icon"></i></th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr class="cursor-pointer hover:bg-base-200/70" data-open-drawer="companyDrawer" data-panel-target="panel-bt"><td>Extended Health Care</td><td>Family</td><td>$420.00/mo</td><td>Canada</td></tr>
+                <tr class="cursor-pointer hover:bg-base-200/70" data-open-drawer="companyDrawer" data-panel-target="panel-bt"><td>Dental Care</td><td>Individual</td><td>$85.00/mo</td><td>Canada</td></tr>
+                <tr class="cursor-pointer hover:bg-base-200/70" data-open-drawer="companyDrawer" data-panel-target="panel-bt"><td>Group Life Insurance</td><td>Standard</td><td>$12.50/mo</td><td>United States</td></tr>
+                <tr class="cursor-pointer hover:bg-base-200/70" data-open-drawer="companyDrawer" data-panel-target="panel-bt"><td>Retirement Savings Plan</td><td>N/A</td><td>5% Match</td><td>United Kingdom</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- ===== Bonus Types ===== -->
+        <div id="tab-bnt" class="tab-content-panel hidden">
+          <div class="flex flex-wrap items-center gap-2 mb-4">
+            <button class="btn btn-sm btn-primary" data-open-drawer="companyDrawer" data-panel-target="panel-bnt"><i data-lucide="plus" class="w-4 h-4"></i>New</button>
+            <button class="btn btn-sm btn-outline" data-open-drawer="companyDrawer" data-panel-target="panel-bnt">Edit</button>
+            <button class="btn btn-sm btn-outline btn-error">Delete</button>
+            <button class="btn btn-sm btn-outline" data-toast="Bonus details applied"><i data-lucide="wand-2" class="w-4 h-4"></i>Apply Bonus Details</button>
+            <div class="grow"></div>
+            <button class="btn btn-sm btn-ghost" data-toast="Changes saved">Save</button>
+            <button class="btn btn-sm btn-primary" data-toast="Saved and closed">Save &amp; Close</button>
+            <button class="btn btn-sm btn-ghost">Close</button>
+          </div>
+          <div class="overflow-x-auto rounded-box border border-base-300">
+            <table class="table table-zebra" id="table-bnt">
+              <thead>
+                <tr>
+                  <th data-sort-key>Display Name <i data-lucide="chevrons-up-down" class="w-3.5 h-3.5 inline sort-icon"></i></th>
+                  <th data-sort-key>Default Payment Date <i data-lucide="chevrons-up-down" class="w-3.5 h-3.5 inline sort-icon"></i></th>
+                  <th data-sort-key>Default Amount <i data-lucide="chevrons-up-down" class="w-3.5 h-3.5 inline sort-icon"></i></th>
+                  <th data-sort-key>Country <i data-lucide="chevrons-up-down" class="w-3.5 h-3.5 inline sort-icon"></i></th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr class="cursor-pointer hover:bg-base-200/70" data-open-drawer="companyDrawer" data-panel-target="panel-bnt"><td>Annual Performance Bonus</td><td>2026-12-15</td><td>10% of Base Salary</td><td>Canada</td></tr>
+                <tr class="cursor-pointer hover:bg-base-200/70" data-open-drawer="companyDrawer" data-panel-target="panel-bnt"><td>Sign-On Bonus</td><td>2026-01-31</td><td>$5,000.00</td><td>United States</td></tr>
+                <tr class="cursor-pointer hover:bg-base-200/70" data-open-drawer="companyDrawer" data-panel-target="panel-bnt"><td>Retention Bonus</td><td>2026-06-30</td><td>$7,500.00</td><td>United Kingdom</td></tr>
+                <tr class="cursor-pointer hover:bg-base-200/70" data-open-drawer="companyDrawer" data-panel-target="panel-bnt"><td>Referral Bonus</td><td>2026-03-15</td><td>$1,000.00</td><td>Singapore</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- ===== Local Lookups ===== -->
+        <div id="tab-ll" class="tab-content-panel hidden">
+          <div class="flex flex-wrap items-center gap-2 mb-4">
+            <button class="btn btn-sm btn-primary" data-open-drawer="companyDrawer" data-panel-target="panel-ll"><i data-lucide="plus" class="w-4 h-4"></i>New</button>
+            <button class="btn btn-sm btn-outline" data-open-drawer="companyDrawer" data-panel-target="panel-ll">Edit</button>
+            <button class="btn btn-sm btn-outline btn-error">Delete</button>
+            <button class="btn btn-sm btn-outline" data-toast="Filters reset"><i data-lucide="rotate-ccw" class="w-4 h-4"></i>Reset Filters</button>
+            <div class="grow"></div>
+            <button class="btn btn-sm btn-ghost" data-toast="Changes saved">Save</button>
+            <button class="btn btn-sm btn-primary" data-toast="Saved and closed">Save &amp; Close</button>
+            <button class="btn btn-sm btn-ghost">Close</button>
+          </div>
+          <label class="input input-bordered input-sm flex items-center gap-2 max-w-xs mb-4">
+            <i data-lucide="search" class="w-4 h-4 opacity-50"></i>
+            <input type="text" class="grow" placeholder="Search local lookups" data-filter-target="table-ll" />
+          </label>
+          <div class="overflow-x-auto rounded-box border border-base-300">
+            <table class="table table-zebra" id="table-ll">
+              <thead>
+                <tr><th>Lookup Type</th><th>Display Name</th></tr>
+                <tr class="bg-base-200/60">
+                  <th><input type="text" placeholder="Query by example" class="input input-bordered input-xs w-full" /></th>
+                  <th><input type="text" placeholder="Query by example" class="input input-bordered input-xs w-full" /></th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr class="cursor-pointer hover:bg-base-200/70" data-open-drawer="companyDrawer" data-panel-target="panel-ll"><td>Marital Status</td><td>Married</td></tr>
+                <tr class="cursor-pointer hover:bg-base-200/70" data-open-drawer="companyDrawer" data-panel-target="panel-ll"><td>Marital Status</td><td>Single</td></tr>
+                <tr class="cursor-pointer hover:bg-base-200/70" data-open-drawer="companyDrawer" data-panel-target="panel-ll"><td>Job Grade</td><td>Senior Consultant</td></tr>
+                <tr class="cursor-pointer hover:bg-base-200/70" data-open-drawer="companyDrawer" data-panel-target="panel-ll"><td>Tax Category</td><td>Standard EU VAT Rate</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p class="text-xs text-base-content/50 mt-2">Type values into the query-by-example row to filter, then use column headers to further refine results.</p>
+        </div>
+
+
+        <!-- ===== Due Diligence ===== -->
+        <div id="tab-dd" class="tab-content-panel hidden">
+          <div class="flex flex-wrap items-center gap-2 mb-4">
+            <button class="btn btn-sm btn-primary"><i data-lucide="plus" class="w-4 h-4"></i>New</button>
+            <button class="btn btn-sm btn-outline">Edit</button>
+            <button class="btn btn-sm btn-outline btn-error">Delete</button>
+            <button class="btn btn-sm btn-outline" data-toast="Document download started"><i data-lucide="download" class="w-4 h-4"></i>Download</button>
+            <button class="btn btn-sm btn-outline" data-toast="Document uploaded (UI only)"><i data-lucide="upload" class="w-4 h-4"></i>Upload</button>
+            <button class="btn btn-sm btn-outline" data-toast="Uploaded and closed">Upload &amp; Close</button>
+            <div class="grow"></div>
+            <button class="btn btn-sm btn-ghost">Cancel</button>
+            <button class="btn btn-sm btn-primary" data-toast="Changes saved">Save</button>
+          </div>
+
+          <div class="grid grid-cols-1 lg:grid-cols-3 gap-4 mb-4">
+            <div class="lg:col-span-2 dropzone border-2 border-dashed border-base-300 rounded-box p-8 flex flex-col items-center justify-center text-center gap-2" data-dropzone data-filelist="ddFileList">
+              <i data-lucide="upload-cloud" class="w-8 h-8 text-base-content/40"></i>
+              <p class="font-medium text-sm">Drag and drop files here</p>
+              <p class="text-xs text-base-content/50">or</p>
+              <label class="btn btn-sm btn-outline">
+                Browse Files
+                <input type="file" multiple class="hidden" />
+              </label>
+              <p class="text-xs text-base-content/40 mt-1">Supports PDF, DOCX, XLSX up to 25 MB</p>
+            </div>
+            <div class="card bg-base-200/40 border border-base-300">
+              <div class="card-body">
+                <h3 class="font-semibold text-sm">Attachment List</h3>
+                <ul id="ddFileList" class="space-y-2 mt-1 max-h-40 overflow-y-auto scroll-thin text-sm">
+                  <li class="flex items-center justify-between gap-3 rounded-lg border border-base-300 bg-base-100 px-3 py-2">
+                    <span class="flex items-center gap-2 truncate"><i data-lucide="file-text" class="w-4 h-4 text-primary shrink-0"></i><span class="truncate">NDA_Acquisition_TargetCo.pdf</span></span>
+                    <span class="badge badge-ghost badge-sm">412 KB</span>
+                  </li>
+                  <li class="flex items-center justify-between gap-3 rounded-lg border border-base-300 bg-base-100 px-3 py-2">
+                    <span class="flex items-center gap-2 truncate"><i data-lucide="file-spreadsheet" class="w-4 h-4 text-success shrink-0"></i><span class="truncate">Financial_Statements_2025.xlsx</span></span>
+                    <span class="badge badge-ghost badge-sm">1.2 MB</span>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <div class="overflow-x-auto rounded-box border border-base-300">
+            <table class="table table-zebra">
+              <thead><tr><th>Document</th><th>Category</th><th>Uploaded By</th><th>Date</th><th>Status</th><th class="text-right">Actions</th></tr></thead>
+              <tbody>
+                <tr>
+                  <td class="flex items-center gap-2"><i data-lucide="file-text" class="w-4 h-4 text-primary"></i>NDA_Acquisition_TargetCo.pdf</td>
+                  <td>Legal</td><td>Jordan Delgado</td><td>2026-08-12</td>
+                  <td><span class="badge badge-warning badge-sm">Pending Review</span></td>
+                  <td class="text-right"><button class="btn btn-ghost btn-xs">View</button></td>
+                </tr>
+                <tr>
+                  <td class="flex items-center gap-2"><i data-lucide="file-spreadsheet" class="w-4 h-4 text-success"></i>Financial_Statements_2025.xlsx</td>
+                  <td>Financial</td><td>Marcus Lindqvist</td><td>2026-08-10</td>
+                  <td><span class="badge badge-success badge-sm">Approved</span></td>
+                  <td class="text-right"><button class="btn btn-ghost btn-xs">View</button></td>
+                </tr>
+                <tr>
+                  <td class="flex items-center gap-2"><i data-lucide="file-text" class="w-4 h-4 text-primary"></i>HR_Org_Chart_TargetCo.pdf</td>
+                  <td>HR</td><td>Sofia Ramirez</td><td>2026-08-05</td>
+                  <td><span class="badge badge-error badge-sm">Rejected</span></td>
+                  <td class="text-right"><button class="btn btn-ghost btn-xs">View</button></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+      </div>
+      </div>
+
+      <!-- Drawer side: shared Add / Edit form for Company page records -->
+      <div class="drawer-side z-[60]">
+        <label for="companyDrawer" class="drawer-overlay"></label>
+        <div class="bg-base-100 min-h-full w-full max-w-lg flex flex-col shadow-2xl">
+          <div class="flex items-center justify-between gap-3 px-5 h-16 border-b border-base-300 bg-base-200/50 shrink-0">
+            <div class="flex items-center gap-3 min-w-0">
+              <span class="w-9 h-9 rounded-lg bg-primary/10 text-primary flex items-center justify-center shrink-0"><i data-lucide="pencil-line" class="w-4.5 h-4.5"></i></span>
+              <div class="min-w-0">
+                <h2 class="font-semibold text-base leading-tight">Add / Edit Record</h2>
+                <p class="text-xs text-base-content/50 leading-tight">Complete the fields below, then save.</p>
+              </div>
+            </div>
+            <label for="companyDrawer" class="btn btn-ghost btn-circle btn-sm shrink-0"><i data-lucide="x" class="w-5 h-5"></i></label>
+          </div>
+
+          <div class="flex-1 overflow-y-auto scroll-thin p-5 space-y-6" data-drawer-panels>
+            <!-- Default Properties -->
+            <div id="panel-dp" class="drawer-form-panel">
+              <div class="flex items-center gap-2.5 mb-3">
+                <span class="w-8 h-8 rounded-lg bg-primary/10 text-primary flex items-center justify-center shrink-0"><i data-lucide="sliders-horizontal" class="w-4 h-4"></i></span>
+                <h3 class="text-sm font-semibold">Default Property Details</h3>
+              </div>
+              <div class="rounded-box border border-base-300 bg-base-200/40 p-4 space-y-4">
+                <div class="form-control"><label class="label py-1"><span class="label-text text-xs">Property Name</span></label><input class="input input-bordered input-sm" value="Default Business Center" /></div>
+                <div class="form-control"><label class="label py-1"><span class="label-text text-xs">Country Name</span></label>
+                  <select class="select select-bordered select-sm">
+                    <option selected>Canada</option>
+                    <option>United States</option>
+                    <option>United Kingdom</option>
+                    <option>Singapore</option>
+                  </select>
+                </div>
+                <div class="form-control"><label class="label py-1"><span class="label-text text-xs">Value</span></label><input class="input input-bordered input-sm" value="BC-100 · Corporate HQ" /></div>
+              </div>
+            </div>
+
+            <!-- Set Of Books -->
+            <div id="panel-sob" class="drawer-form-panel hidden">
+              <div class="flex items-center gap-2.5 mb-3">
+                <span class="w-8 h-8 rounded-lg bg-primary/10 text-primary flex items-center justify-center shrink-0"><i data-lucide="book-open" class="w-4 h-4"></i></span>
+                <h3 class="text-sm font-semibold">Set Of Books Details</h3>
+              </div>
+              <div class="rounded-box border border-base-300 bg-base-200/40 p-4 space-y-4">
+                <div class="form-control"><label class="label py-1"><span class="label-text text-xs">Legal Entity Name</span></label>
+                  <select class="select select-bordered select-sm">
+                    <option selected>Stantec Consulting Ltd.</option>
+                    <option>Stantec Consulting Services Inc.</option>
+                    <option>Stantec UK Ltd.</option>
+                    <option>Stantec Asia Pacific Pte. Ltd.</option>
+                  </select>
+                </div>
+                <div class="form-control"><label class="label py-1"><span class="label-text text-xs">Business Center Name</span></label>
+                  <select class="select select-bordered select-sm">
+                    <option selected>Corporate HQ</option>
+                    <option>EMEA Operations</option>
+                    <option>APAC Shared Services</option>
+                    <option>LATAM Delivery</option>
+                  </select>
+                </div>
+                <div class="form-control"><label class="label py-1"><span class="label-text text-xs">Business Line Name</span></label>
+                  <select class="select select-bordered select-sm">
+                    <option selected>Engineering &amp; Design</option>
+                    <option>Environmental Services</option>
+                    <option>Water Resources</option>
+                    <option>Transportation</option>
+                  </select>
+                </div>
+                <div class="form-control"><label class="label py-1"><span class="label-text text-xs">Office Location Name</span></label>
+                  <select class="select select-bordered select-sm">
+                    <option selected>Toronto, ON</option>
+                    <option>London, UK</option>
+                    <option>Singapore</option>
+                    <option>São Paulo, BR</option>
+                  </select>
+                </div>
+                <div class="form-control"><label class="label py-1"><span class="label-text text-xs">Status</span></label>
+                  <select class="select select-bordered select-sm">
+                    <option selected>Active</option>
+                    <option>Inactive</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+
+            <!-- Legal Entities -->
+            <div id="panel-le" class="drawer-form-panel hidden">
+              <div class="flex items-center gap-2.5 mb-3">
+                <span class="w-8 h-8 rounded-lg bg-primary/10 text-primary flex items-center justify-center shrink-0"><i data-lucide="scale" class="w-4 h-4"></i></span>
+                <h3 class="text-sm font-semibold">Legal Entity Details</h3>
+              </div>
+              <div class="rounded-box border border-base-300 bg-base-200/40 p-4 space-y-4">
+                <div class="form-control"><label class="label py-1"><span class="label-text text-xs">Legal Entities Name</span></label><input class="input input-bordered input-sm" value="Stantec Consulting Ltd." /></div>
+                <div class="form-control"><label class="label py-1"><span class="label-text text-xs">Pto Vacation</span></label><input class="input input-bordered input-sm" value="15 days" /></div>
+                <div class="form-control"><label class="label py-1"><span class="label-text text-xs">Status</span></label>
+                  <select class="select select-bordered select-sm">
+                    <option selected>Active</option>
+                    <option>Inactive</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+
+            <!-- Benefit Types -->
+            <div id="panel-bt" class="drawer-form-panel hidden">
+              <div class="flex items-center gap-2.5 mb-3">
+                <span class="w-8 h-8 rounded-lg bg-primary/10 text-primary flex items-center justify-center shrink-0"><i data-lucide="heart-pulse" class="w-4 h-4"></i></span>
+                <h3 class="text-sm font-semibold">Benefit Type Details</h3>
+              </div>
+              <div class="rounded-box border border-base-300 bg-base-200/40 p-4 space-y-4">
+                <div class="form-control"><label class="label py-1"><span class="label-text text-xs">Display Name</span></label><input class="input input-bordered input-sm" value="Extended Health Care" /></div>
+                <div class="form-control"><label class="label py-1"><span class="label-text text-xs">Default Coverage Level</span></label>
+                  <select class="select select-bordered select-sm">
+                    <option selected>Family</option>
+                    <option>Individual</option>
+                    <option>Standard</option>
+                    <option>N/A</option>
+                  </select>
+                </div>
+                <div class="form-control"><label class="label py-1"><span class="label-text text-xs">Default Cost</span></label><input class="input input-bordered input-sm" value="$420.00/mo" /></div>
+                <div class="form-control"><label class="label py-1"><span class="label-text text-xs">Country</span></label>
+                  <select class="select select-bordered select-sm">
+                    <option selected>Canada</option>
+                    <option>United States</option>
+                    <option>United Kingdom</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+
+            <!-- Bonus Types -->
+            <div id="panel-bnt" class="drawer-form-panel hidden">
+              <div class="flex items-center gap-2.5 mb-3">
+                <span class="w-8 h-8 rounded-lg bg-primary/10 text-primary flex items-center justify-center shrink-0"><i data-lucide="gift" class="w-4 h-4"></i></span>
+                <h3 class="text-sm font-semibold">Bonus Type Details</h3>
+              </div>
+              <div class="rounded-box border border-base-300 bg-base-200/40 p-4 space-y-4">
+                <div class="form-control"><label class="label py-1"><span class="label-text text-xs">Display Name</span></label><input class="input input-bordered input-sm" value="Annual Performance Bonus" /></div>
+                <div class="form-control"><label class="label py-1"><span class="label-text text-xs">Default Payment Date</span></label><input type="date" class="input input-bordered input-sm" value="2026-12-15" /></div>
+                <div class="form-control"><label class="label py-1"><span class="label-text text-xs">Default Amount</span></label><input class="input input-bordered input-sm" value="10% of Base Salary" /></div>
+                <div class="form-control"><label class="label py-1"><span class="label-text text-xs">Country</span></label>
+                  <select class="select select-bordered select-sm">
+                    <option selected>Canada</option>
+                    <option>United States</option>
+                    <option>United Kingdom</option>
+                    <option>Singapore</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+
+            <!-- Local Lookups -->
+            <div id="panel-ll" class="drawer-form-panel hidden">
+              <div class="flex items-center gap-2.5 mb-3">
+                <span class="w-8 h-8 rounded-lg bg-primary/10 text-primary flex items-center justify-center shrink-0"><i data-lucide="list-filter" class="w-4 h-4"></i></span>
+                <h3 class="text-sm font-semibold">Local Lookup Details</h3>
+              </div>
+              <div class="rounded-box border border-base-300 bg-base-200/40 p-4 space-y-4">
+                <div class="form-control"><label class="label py-1"><span class="label-text text-xs">Lookup Type</span></label>
+                  <select class="select select-bordered select-sm">
+                    <option selected>Marital Status</option>
+                    <option>Job Grade</option>
+                    <option>Tax Category</option>
+                  </select>
+                </div>
+                <div class="form-control"><label class="label py-1"><span class="label-text text-xs">Display Name</span></label><input class="input input-bordered input-sm" value="Married" /></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="border-t border-base-300 bg-base-200/50 p-4 flex items-center justify-end gap-2 shrink-0">
+            <label for="companyDrawer" class="btn btn-ghost btn-sm">Cancel</label>
+            <button class="btn btn-outline btn-sm" data-toast="Changes saved">Save</button>
+            <label for="companyDrawer" class="btn btn-primary btn-sm" data-toast="Record saved and closed">Save &amp; Close</label>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="toastContainer" class="toast toast-end"></div>
+<script src="assets/js/app.js"></script>
+</body>
+</html>

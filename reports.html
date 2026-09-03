@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="ctk-light">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Reports · HR Acquisition Administration</title>
+<script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+<link href="https://cdn.jsdelivr.net/npm/daisyui@5" rel="stylesheet" type="text/css" />
+<script src="https://unpkg.com/lucide@latest"></script>
+<link rel="stylesheet" href="assets/css/theme.css" />
+<link rel="stylesheet" href="assets/css/custom.css" />
+</head>
+<body class="bg-base-100 text-base-content">
+
+<div class="flex h-screen overflow-hidden">
+  <!-- ============ SIDEBAR (partials/sidebar.html) ============ -->
+  <aside id="sidebar" class="bg-base-200 border-r border-base-300 h-screen flex flex-col shrink-0 transition-all duration-300 ease-in-out">
+    <div class="h-16 flex items-center gap-2 px-4 border-b border-base-300 shrink-0">
+      <div class="w-9 h-9 rounded-lg bg-primary text-primary-content flex items-center justify-center font-bold shrink-0">HR</div>
+      <span id="sidebarBrandText" class="leading-tight">
+        <span class="block font-semibold text-base">HR Acquisition</span>
+        <span class="block text-xs font-normal text-base-content/60">Administration</span>
+      </span>
+    </div>
+    <nav class="flex-1 overflow-y-auto scroll-thin py-4 px-2 space-y-1">
+      <a href="index.html" class="nav-link px-3 py-2.5 rounded-lg text-sm font-medium text-base-content/70 hover:bg-base-300 hover:text-primary tooltip tooltip-right" data-tip="Company">
+        <i data-lucide="building-2" class="w-5 h-5 shrink-0"></i><span class="sidebar-label">Company</span>
+      </a>
+      <a href="employees.html" class="nav-link px-3 py-2.5 rounded-lg text-sm font-medium text-base-content/70 hover:bg-base-300 hover:text-primary tooltip tooltip-right" data-tip="Employees">
+        <i data-lucide="users" class="w-5 h-5 shrink-0"></i><span class="sidebar-label">Employees</span>
+      </a>
+      <a href="import-data.html" class="nav-link px-3 py-2.5 rounded-lg text-sm font-medium text-base-content/70 hover:bg-base-300 hover:text-primary tooltip tooltip-right" data-tip="Import Data">
+        <i data-lucide="upload" class="w-5 h-5 shrink-0"></i><span class="sidebar-label">Import Data</span>
+      </a>
+      <a href="batch-processing.html" class="nav-link px-3 py-2.5 rounded-lg text-sm font-medium text-base-content/70 hover:bg-base-300 hover:text-primary tooltip tooltip-right" data-tip="Batch Processing">
+        <i data-lucide="layers" class="w-5 h-5 shrink-0"></i><span class="sidebar-label">Batch Processing</span>
+      </a>
+      <a href="reports.html" class="nav-link px-3 py-2.5 rounded-lg text-sm font-medium bg-base-300 text-base-content tooltip tooltip-right" data-tip="Reports">
+        <i data-lucide="bar-chart-3" class="w-5 h-5 shrink-0"></i><span class="sidebar-label">Reports</span>
+      </a>
+      <a href="administrator.html" class="nav-link px-3 py-2.5 rounded-lg text-sm font-medium text-base-content/70 hover:bg-base-300 hover:text-primary tooltip tooltip-right" data-tip="Administrator">
+        <i data-lucide="shield" class="w-5 h-5 shrink-0"></i><span class="sidebar-label">Administrator</span>
+      </a>
+    </nav>
+    <div class="border-t border-base-300 p-2">
+      <button id="sidebarToggle" class="nav-link w-full px-3 py-2.5 rounded-lg text-sm font-medium text-base-content/70 hover:bg-base-300">
+        <i id="sidebarToggleIcon" data-lucide="chevron-left" class="w-5 h-5 shrink-0"></i><span class="sidebar-label">Collapse</span>
+      </button>
+    </div>
+  </aside>
+
+  <div class="flex-1 flex flex-col overflow-hidden">
+    <!-- ============ HEADER (partials/header.html) ============ -->
+    <header class="shrink-0 px-4 lg:px-6 pt-4">
+      <div class="card bg-base-200 border border-base-300 shadow-sm rounded-box">
+      <div class="card-body py-3 px-4 flex-row flex-wrap items-center justify-between gap-3">
+        <div class="flex flex-wrap items-end gap-2 min-w-0">
+          <label class="form-control">
+            <span class="label-text text-xs px-0.5 pb-1">Company Name</span>
+            <div class="dropdown">
+              <div tabindex="0" role="button" class="input input-bordered input-sm w-56 flex items-center justify-between gap-2 cursor-pointer">
+                <span class="truncate font-medium">Stantec Consulting Ltd.</span>
+                <i data-lucide="chevrons-up-down" class="w-3.5 h-3.5 opacity-50 shrink-0"></i>
+              </div>
+              <ul tabindex="0" class="dropdown-content menu bg-base-100 border border-base-300 rounded-box z-[100] mt-2 w-72 p-2 shadow-md">
+                <li class="menu-title">Switch Company</li>
+                <li><a class="flex items-center justify-between font-semibold text-primary"><span class="truncate">Stantec Consulting Ltd.</span><span class="badge badge-ghost badge-sm">STN-CA-001</span></a></li>
+                <li><a class="flex items-center justify-between"><span class="truncate">Stantec Consulting Services Inc.</span><span class="badge badge-ghost badge-sm">STN-US-002</span></a></li>
+                <li><a class="flex items-center justify-between"><span class="truncate">Stantec UK Ltd.</span><span class="badge badge-ghost badge-sm">STN-UK-003</span></a></li>
+                <li><a class="flex items-center justify-between"><span class="truncate">TargetCo Asia Pacific Pte. Ltd.</span><span class="badge badge-ghost badge-sm">TGT-SG-010</span></a></li>
+              </ul>
+            </div>
+          </label>
+          <button class="btn btn-sm btn-outline" data-toast="New company wizard started (UI only)">
+            <i data-lucide="plus" class="w-4 h-4"></i>New Company
+          </button>
+        </div>
+        <div class="flex items-center gap-2">
+          <div class="rounded-lg bg-base-100 border border-base-300 p-1">
+            <div class="dropdown dropdown-end">
+              <button tabindex="0" class="btn btn-ghost btn-circle btn-sm">
+                <div class="indicator"><i data-lucide="bell" class="w-5 h-5"></i><span class="badge badge-xs badge-error indicator-item"></span></div>
+              </button>
+              <div tabindex="0" class="dropdown-content z-[50] mt-2 card card-compact w-80 bg-base-100 shadow-xl border border-base-300">
+                <div class="card-body">
+                  <span class="font-semibold text-sm">Notifications</span>
+                  <ul class="mt-1 divide-y divide-base-300 text-sm">
+                    <li class="py-2"><p class="font-medium">Report ready</p><p class="text-base-content/60 text-xs">Headcount_By_BusinessCenter.pdf generated</p></li>
+                  </ul>
+                  <button class="btn btn-sm btn-ghost mt-2">View all</button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="rounded-lg bg-base-100 border border-base-300 p-1">
+            <div class="dropdown dropdown-end">
+              <button tabindex="0" class="btn btn-ghost btn-sm gap-1"><i data-lucide="globe" class="w-4 h-4"></i><span class="hidden sm:inline">EN</span></button>
+              <ul tabindex="0" class="dropdown-content z-[50] menu mt-2 p-2 shadow-xl bg-base-100 border border-base-300 rounded-box w-40">
+                <li><a>English (US)</a></li><li><a>Français (CA)</a></li><li><a>Español (MX)</a></li><li><a>Deutsch (DE)</a></li>
+              </ul>
+            </div>
+          </div>
+          <div class="rounded-lg bg-base-100 border border-base-300 p-1">
+            <label class="btn btn-ghost btn-circle swap swap-rotate" aria-label="Toggle dark mode">
+              <input id="themeToggle" type="checkbox" class="theme-controller" value="ctk-dark" />
+              <i data-lucide="sun" class="swap-off w-5 h-5"></i>
+              <i data-lucide="moon" class="swap-on w-5 h-5"></i>
+            </label>
+          </div>
+          <div class="rounded-lg bg-base-100 border border-base-300 p-1">
+            <div class="dropdown dropdown-end">
+              <button tabindex="0" class="btn btn-ghost btn-sm gap-2 pl-1 pr-2">
+                <div class="avatar placeholder"><div class="bg-primary text-primary-content rounded-full w-8"><span class="text-xs">JD</span></div></div>
+                <span class="hidden lg:inline text-sm font-medium">Jordan Delgado</span>
+                <i data-lucide="chevron-down" class="w-4 h-4 hidden lg:inline"></i>
+              </button>
+              <ul tabindex="0" class="dropdown-content z-[50] menu mt-2 p-2 shadow-xl bg-base-100 border border-base-300 rounded-box w-52">
+                <li class="menu-title text-xs">Jordan Delgado · HR Administrator</li>
+                <li><a><i data-lucide="user" class="w-4 h-4"></i>My Profile</a></li>
+                <li><a><i data-lucide="settings" class="w-4 h-4"></i>Preferences</a></li>
+                <li><a><i data-lucide="log-out" class="w-4 h-4"></i>Sign Out</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+      </div>
+    </header>
+
+    <!-- ============ PAGE CONTENT (pages/reports.html) ============ -->
+    <main class="flex-1 overflow-y-auto scroll-thin p-4 lg:p-6">
+      <div class="page-toolbar">
+        <div>
+          <p class="page-title">Analytics</p>
+          <h1 class="page-subtitle">Reports</h1>
+        </div>
+      </div>
+      <p class="text-base-content/60 text-sm -mt-2 mb-4">Generate and download standard HR acquisition reports.</p>
+
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-4 mb-6">
+        <!-- Report selector -->
+        <div class="card bg-base-200 border border-base-300 lg:col-span-2">
+          <div class="card-body">
+            <h3 class="card-title text-base">Available Reports</h3>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-2">
+              <div class="form-control">
+                <label class="label py-1"><span class="label-text">Report</span></label>
+                <select id="reportSelect" class="select select-bordered select-sm">
+                  <option selected>Headcount By Business Center</option>
+                  <option>Employee Roster</option>
+                  <option>Benefits Enrollment Summary</option>
+                  <option>Bonus Distribution Analysis</option>
+                  <option>Due Diligence Document Status</option>
+                  <option>Import Audit Trail</option>
+                </select>
+              </div>
+              <div class="form-control">
+                <label class="label py-1"><span class="label-text">Country Selection</span></label>
+                <select class="select select-bordered select-sm">
+                  <option>Single Country: Canada</option>
+                  <option>Single Country: United States</option>
+                  <option>Single Country: United Kingdom</option>
+                  <option>Single Country: Singapore</option>
+                  <option selected>All Countries</option>
+                </select>
+              </div>
+            </div>
+            <div class="mt-4">
+              <button class="btn btn-sm btn-primary" data-toast="Report download started">
+                <i data-lucide="download" class="w-4 h-4"></i>Download
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Description panel -->
+        <div class="card bg-base-200 border border-base-300">
+          <div class="card-body">
+            <h3 class="card-title text-sm flex items-center gap-2"><i data-lucide="info" class="w-4 h-4 text-primary"></i>Report Description</h3>
+            <p class="text-sm text-base-content/70 mt-1">
+              Summarizes active headcount grouped by business center, including department breakdown and
+              status distribution across all configured locations. Useful for validating org structure
+              during acquisition onboarding.
+            </p>
+            <div class="mt-3 text-xs text-base-content/50 space-y-1">
+              <p><span class="font-medium text-base-content/70">Format:</span> PDF / XLSX</p>
+              <p><span class="font-medium text-base-content/70">Last generated:</span> 2026-08-30 09:14 AM</p>
+              <p><span class="font-medium text-base-content/70">Owner:</span> HR Analytics Team</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Recent Reports -->
+      <div class="card bg-base-200 border border-base-300">
+        <div class="card-body">
+          <h3 class="card-title text-base">Recent Reports</h3>
+          <div class="overflow-x-auto rounded-box border border-base-300 mt-2">
+            <table class="table table-zebra">
+              <thead>
+                <tr><th>Report Name</th><th>Country</th><th>Generated By</th><th>Date</th><th>Format</th><th>Status</th><th class="text-right">Actions</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Headcount By Business Center</td><td>All Countries</td><td>Jordan Delgado</td><td>2026-08-30</td><td>PDF</td>
+                  <td><span class="badge badge-success badge-sm">Ready</span></td>
+                  <td class="text-right"><button class="btn btn-ghost btn-xs"><i data-lucide="download" class="w-4 h-4"></i></button></td>
+                </tr>
+                <tr>
+                  <td>Employee Roster</td><td>Canada</td><td>Alicia Ferreira</td><td>2026-08-27</td><td>XLSX</td>
+                  <td><span class="badge badge-success badge-sm">Ready</span></td>
+                  <td class="text-right"><button class="btn btn-ghost btn-xs"><i data-lucide="download" class="w-4 h-4"></i></button></td>
+                </tr>
+                <tr>
+                  <td>Benefits Enrollment Summary</td><td>United Kingdom</td><td>Marcus Lindqvist</td><td>2026-08-21</td><td>PDF</td>
+                  <td><span class="badge badge-warning badge-sm">Generating</span></td>
+                  <td class="text-right"><button class="btn btn-ghost btn-xs" disabled><i data-lucide="download" class="w-4 h-4"></i></button></td>
+                </tr>
+                <tr>
+                  <td>Due Diligence Document Status</td><td>All Countries</td><td>Sofia Ramirez</td><td>2026-08-15</td><td>PDF</td>
+                  <td><span class="badge badge-error badge-sm">Failed</span></td>
+                  <td class="text-right"><button class="btn btn-ghost btn-xs"><i data-lucide="refresh-cw" class="w-4 h-4"></i></button></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+</div>
+
+<div id="toastContainer" class="toast toast-end"></div>
+<script src="assets/js/app.js"></script>
+</body>
+</html>
