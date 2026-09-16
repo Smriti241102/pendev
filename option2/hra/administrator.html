@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="ctk-light">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Administrator · HR Acquisition Administration</title>
+<script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+<link href="https://cdn.jsdelivr.net/npm/daisyui@5" rel="stylesheet" type="text/css" />
+<script src="https://unpkg.com/lucide@latest"></script>
+<link rel="stylesheet" href="assets/css/theme.css" />
+<link rel="stylesheet" href="assets/css/custom.css" />
+</head>
+<body class="bg-base-100 text-base-content">
+
+<div class="flex h-screen overflow-hidden">
+  <!-- ============ SIDEBAR (partials/sidebar.html) ============ -->
+  <aside id="sidebar" class="bg-base-200 border-r border-base-300 h-screen flex flex-col shrink-0 transition-all duration-300 ease-in-out">
+    <div class="sidebar-topbar h-16 flex items-center justify-between gap-2 px-4 border-b border-base-300 shrink-0">
+      <div class="sidebar-logo flex items-center gap-2 min-w-0">
+        <div class="w-9 h-9 rounded-lg bg-primary text-primary-content flex items-center justify-center font-bold shrink-0">HR</div>
+        <span id="sidebarBrandText" class="leading-tight">
+          <span class="block font-semibold text-base">HR Acquisition</span>
+          <span class="block text-xs font-normal text-base-content/60">Administration</span>
+        </span>
+      </div>
+      <button id="sidebarToggle" class="btn btn-ghost btn-circle btn-sm shrink-0" aria-label="Toggle sidebar">
+        <i id="sidebarToggleIcon" data-lucide="menu" class="w-5 h-5"></i>
+      </button>
+    </div>
+    <nav class="flex-1 overflow-y-auto scroll-thin py-4 px-2 space-y-1">
+      <a href="index.html#tab-details" class="nav-link px-3 py-2.5 rounded-lg text-sm font-medium text-base-content/70 hover:bg-base-300 hover:text-primary tooltip tooltip-right flex items-center gap-2" data-tip="Company Details">
+        <i data-lucide="file-text" class="w-5 h-5 shrink-0"></i><span class="sidebar-label">Company Details</span>
+      </a>
+      <a href="index.html#tab-dp" class="nav-link px-3 py-2.5 rounded-lg text-sm font-medium text-base-content/70 hover:bg-base-300 hover:text-primary tooltip tooltip-right flex items-center gap-2" data-tip="Default Properties">
+        <i data-lucide="sliders-horizontal" class="w-5 h-5 shrink-0"></i><span class="sidebar-label">Default Properties</span>
+      </a>
+      <a href="index.html#tab-sob" class="nav-link px-3 py-2.5 rounded-lg text-sm font-medium text-base-content/70 hover:bg-base-300 hover:text-primary tooltip tooltip-right flex items-center gap-2" data-tip="Set Of Books">
+        <i data-lucide="book-open" class="w-5 h-5 shrink-0"></i><span class="sidebar-label">Set Of Books</span>
+      </a>
+      <a href="index.html#tab-le" class="nav-link px-3 py-2.5 rounded-lg text-sm font-medium text-base-content/70 hover:bg-base-300 hover:text-primary tooltip tooltip-right flex items-center gap-2" data-tip="Legal Entities">
+        <i data-lucide="scale" class="w-5 h-5 shrink-0"></i><span class="sidebar-label">Legal Entities</span>
+      </a>
+      <a href="index.html#tab-bt" class="nav-link px-3 py-2.5 rounded-lg text-sm font-medium text-base-content/70 hover:bg-base-300 hover:text-primary tooltip tooltip-right flex items-center gap-2" data-tip="Benefit Types">
+        <i data-lucide="heart-pulse" class="w-5 h-5 shrink-0"></i><span class="sidebar-label">Benefit Types</span>
+      </a>
+      <a href="index.html#tab-bnt" class="nav-link px-3 py-2.5 rounded-lg text-sm font-medium text-base-content/70 hover:bg-base-300 hover:text-primary tooltip tooltip-right flex items-center gap-2" data-tip="Bonus Types">
+        <i data-lucide="gift" class="w-5 h-5 shrink-0"></i><span class="sidebar-label">Bonus Types</span>
+      </a>
+      <a href="index.html#tab-ll" class="nav-link px-3 py-2.5 rounded-lg text-sm font-medium text-base-content/70 hover:bg-base-300 hover:text-primary tooltip tooltip-right flex items-center gap-2" data-tip="Local Lookups">
+        <i data-lucide="list-filter" class="w-5 h-5 shrink-0"></i><span class="sidebar-label">Local Lookups</span>
+      </a>
+      <a href="index.html#tab-dd" class="nav-link px-3 py-2.5 rounded-lg text-sm font-medium text-base-content/70 hover:bg-base-300 hover:text-primary tooltip tooltip-right flex items-center gap-2" data-tip="Due Diligence">
+        <i data-lucide="shield-check" class="w-5 h-5 shrink-0"></i><span class="sidebar-label">Due Diligence</span>
+      </a>
+
+      <div class="pt-2 border-t border-base-300 space-y-1">
+        <a href="employees.html" class="nav-link px-3 py-2.5 rounded-lg text-sm font-medium text-base-content/70 hover:bg-base-300 hover:text-primary tooltip tooltip-right" data-tip="Employees">
+          <i data-lucide="users" class="w-5 h-5 shrink-0"></i><span class="sidebar-label">Employees</span>
+        </a>
+        <a href="oracle-settings.html" class="nav-link px-3 py-2.5 rounded-lg text-sm font-medium text-base-content/70 hover:bg-base-300 hover:text-primary tooltip tooltip-right" data-tip="Oracle Settings">
+          <i data-lucide="database" class="w-5 h-5 shrink-0"></i><span class="sidebar-label">Oracle Settings</span>
+        </a>
+        <a href="import-data.html" class="nav-link px-3 py-2.5 rounded-lg text-sm font-medium text-base-content/70 hover:bg-base-300 hover:text-primary tooltip tooltip-right" data-tip="Import Data">
+          <i data-lucide="upload" class="w-5 h-5 shrink-0"></i><span class="sidebar-label">Import Data</span>
+        </a>
+        <a href="batch-processing.html" class="nav-link px-3 py-2.5 rounded-lg text-sm font-medium text-base-content/70 hover:bg-base-300 hover:text-primary tooltip tooltip-right" data-tip="Batch Processing">
+          <i data-lucide="layers" class="w-5 h-5 shrink-0"></i><span class="sidebar-label">Batch Processing</span>
+        </a>
+        <a href="reports.html" class="nav-link px-3 py-2.5 rounded-lg text-sm font-medium text-base-content/70 hover:bg-base-300 hover:text-primary tooltip tooltip-right" data-tip="Reports">
+          <i data-lucide="bar-chart-3" class="w-5 h-5 shrink-0"></i><span class="sidebar-label">Reports</span>
+        </a>
+        <a href="administrator.html" class="nav-link px-3 py-2.5 rounded-lg text-sm font-medium bg-base-300 text-base-content tooltip tooltip-right" data-tip="Administrator">
+          <i data-lucide="shield" class="w-5 h-5 shrink-0"></i><span class="sidebar-label">Administrator</span>
+        </a>
+      </div>
+    </nav>
+  </aside>
+
+  <div class="flex-1 flex flex-col overflow-hidden">
+    <!-- ============ HEADER (partials/header.html) ============ -->
+    <header class="shrink-0 px-4 lg:px-6 pt-4">
+      <div class="card bg-base-200 border border-base-300 shadow-sm rounded-box">
+      <div class="card-body py-3 px-4 flex-row flex-wrap items-center justify-between gap-3">
+        <div class="flex flex-wrap items-end gap-2 min-w-0">
+          <label class="form-control">
+            <span class="label-text text-xs px-0.5 pb-1">Company Name</span>
+            <div class="dropdown">
+              <div tabindex="0" role="button" class="input input-bordered input-sm w-56 flex items-center justify-between gap-2 cursor-pointer">
+                <span class="truncate font-medium">Stantec Consulting Ltd.</span>
+                <i data-lucide="chevrons-up-down" class="w-3.5 h-3.5 opacity-50 shrink-0"></i>
+              </div>
+              <ul tabindex="0" class="dropdown-content menu bg-base-100 border border-base-300 rounded-box z-[100] mt-2 w-72 p-2 shadow-md">
+                <li class="menu-title">Switch Company</li>
+                <li><a class="flex items-center justify-between font-semibold text-primary"><span class="truncate">Stantec Consulting Ltd.</span><span class="badge badge-ghost badge-sm">STN-CA-001</span></a></li>
+                <li><a class="flex items-center justify-between"><span class="truncate">Stantec Consulting Services Inc.</span><span class="badge badge-ghost badge-sm">STN-US-002</span></a></li>
+                <li><a class="flex items-center justify-between"><span class="truncate">Stantec UK Ltd.</span><span class="badge badge-ghost badge-sm">STN-UK-003</span></a></li>
+                <li><a class="flex items-center justify-between"><span class="truncate">TargetCo Asia Pacific Pte. Ltd.</span><span class="badge badge-ghost badge-sm">TGT-SG-010</span></a></li>
+              </ul>
+            </div>
+          </label>
+          <button class="btn btn-sm btn-primary" onclick="document.getElementById('newCompanyModal').showModal()">
+            <i data-lucide="plus" class="w-4 h-4"></i>New Company
+          </button>
+          <div class="hidden md:flex items-center gap-2 rounded-lg bg-base-100 border border-base-300 px-3 py-1.5 text-xs text-base-content/70">
+            <i data-lucide="database-zap" class="w-3.5 h-3.5 text-primary shrink-0"></i>
+            <span>Oracle last refreshed: <span class="font-medium text-base-content">Today, 8:42 AM</span></span>
+            <button class="btn btn-ghost btn-circle btn-xs -mr-1" data-toast="Oracle refresh started (UI only)" aria-label="Refresh Oracle data">
+              <i data-lucide="refresh-cw" class="w-3.5 h-3.5"></i>
+            </button>
+          </div>
+        </div>
+        <div class="flex items-center gap-2">
+          <div class="rounded-lg bg-base-100 border border-base-300 p-1">
+            <div class="dropdown dropdown-end">
+              <button tabindex="0" class="btn btn-ghost btn-circle btn-sm">
+                <div class="indicator"><i data-lucide="bell" class="w-5 h-5"></i><span class="badge badge-xs badge-error indicator-item"></span></div>
+              </button>
+              <div tabindex="0" class="dropdown-content z-[50] mt-2 card card-compact w-80 bg-base-100 shadow-xl border border-base-300">
+                <div class="card-body">
+                  <span class="font-semibold text-sm">Notifications</span>
+                  <ul class="mt-1 divide-y divide-base-300 text-sm">
+                    <li class="py-2"><p class="font-medium">Service degradation resolved</p><p class="text-base-content/60 text-xs">Reporting service back to normal operation</p></li>
+                    <li class="py-2"><p class="font-medium">New admin user added</p><p class="text-base-content/60 text-xs">Priya Natarajan granted Company Manager role</p></li>
+                  </ul>
+                  <button class="btn btn-sm btn-ghost mt-2">View all</button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="rounded-lg bg-base-100 border border-base-300 p-1">
+            <div class="dropdown dropdown-end">
+              <button tabindex="0" class="btn btn-ghost btn-sm gap-1"><i data-lucide="globe" class="w-4 h-4"></i><span class="hidden sm:inline">EN</span></button>
+              <ul tabindex="0" class="dropdown-content z-[50] menu mt-2 p-2 shadow-xl bg-base-100 border border-base-300 rounded-box w-40">
+                <li><a>English (US)</a></li><li><a>Français (CA)</a></li><li><a>Español (MX)</a></li><li><a>Deutsch (DE)</a></li>
+              </ul>
+            </div>
+          </div>
+          <div class="rounded-lg bg-base-100 border border-base-300 p-1">
+            <label class="btn btn-ghost btn-circle swap swap-rotate" aria-label="Toggle dark mode">
+              <input id="themeToggle" type="checkbox" class="theme-controller" value="ctk-dark" />
+              <i data-lucide="sun" class="swap-off w-5 h-5"></i>
+              <i data-lucide="moon" class="swap-on w-5 h-5"></i>
+            </label>
+          </div>
+          <div class="rounded-lg bg-base-100 border border-base-300 p-1">
+            <div class="dropdown dropdown-end">
+              <button tabindex="0" class="btn btn-ghost btn-sm gap-2 pl-1 pr-2">
+                <div class="avatar placeholder"><div class="bg-primary text-primary-content rounded-full w-8"><span class="text-xs">JD</span></div></div>
+                <span class="hidden lg:inline text-sm font-medium">Jordan Delgado</span>
+                <i data-lucide="chevron-down" class="w-4 h-4 hidden lg:inline"></i>
+              </button>
+              <ul tabindex="0" class="dropdown-content z-[50] menu mt-2 p-2 shadow-xl bg-base-100 border border-base-300 rounded-box w-52">
+                <li class="menu-title text-xs">Jordan Delgado · HR Administrator</li>
+                <li><a><i data-lucide="user" class="w-4 h-4"></i>My Profile</a></li>
+                <li><a><i data-lucide="settings" class="w-4 h-4"></i>Preferences</a></li>
+                <li><a href="login.html"><i data-lucide="log-out" class="w-4 h-4"></i>Sign Out</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+      </div>
+    </header>
+
+    <!-- ============ PAGE CONTENT (pages/administrator.html) ============ -->
+    <div class="drawer drawer-end flex-1 min-h-0 overflow-hidden">
+      <input id="userDrawer" type="checkbox" class="drawer-toggle" />
+      <main class="drawer-content h-full overflow-y-auto scroll-thin p-4 lg:p-6">
+      <div class="page-toolbar">
+        <div>
+          <p class="page-title">System</p>
+          <h1 class="page-subtitle">Administrator</h1>
+        </div>
+      </div>
+      <p class="text-base-content/60 text-sm -mt-2 mb-4">Manage users, companies, and system diagnostics.</p>
+
+      <div role="tablist" class="tabs tabs-lift" data-tabs-group="adminTabs">
+        <a role="tab" class="tab tab-active" data-tab-target="tab-users">User Manager</a>
+        <a role="tab" class="tab" data-tab-target="tab-companies">Company Manager</a>
+        <a role="tab" class="tab" data-tab-target="tab-diagnostics">Diagnostics</a>
+      </div>
+
+      <div data-tabs-panels="adminTabs" class="bg-base-200 border border-base-300 rounded-b-box rounded-tr-box p-4 lg:p-6">
+
+        <!-- ===== User Manager ===== -->
+        <div id="tab-users" class="tab-content-panel">
+          <div class="flex flex-wrap items-center gap-2 mb-4">
+            <label class="input input-bordered input-sm flex items-center gap-2 max-w-xs">
+              <i data-lucide="search" class="w-4 h-4 opacity-50"></i>
+              <input type="text" class="grow" placeholder="Search users" data-filter-target="table-users" />
+            </label>
+            <div class="grow"></div>
+            <button class="btn btn-sm btn-primary" data-toast="New user invited"><i data-lucide="user-plus" class="w-4 h-4"></i>Invite User</button>
+          </div>
+          <div class="overflow-x-auto rounded-box border border-base-300">
+            <table class="table table-zebra" id="table-users">
+              <thead><tr><th>Full Name</th><th>Login Name</th><th>Status</th></tr></thead>
+              <tbody>
+                <tr class="cursor-pointer" data-user-id="jordan-delgado" data-full-name="Jordan Delgado" data-login-name="jdelgado" data-status="Active" data-disabled="false" data-roles="HR Administrator|User Manager">
+                  <td class="font-medium">Jordan Delgado</td><td>jdelgado</td>
+                  <td><span class="badge badge-success badge-sm">Active</span></td>
+                </tr>
+                <tr class="cursor-pointer" data-user-id="priya-natarajan" data-full-name="Priya Natarajan" data-login-name="pnatarajan" data-status="Active" data-disabled="false" data-roles="Company Manager">
+                  <td class="font-medium">Priya Natarajan</td><td>pnatarajan</td>
+                  <td><span class="badge badge-success badge-sm">Active</span></td>
+                </tr>
+                <tr class="cursor-pointer" data-user-id="wei-chen" data-full-name="Wei Chen" data-login-name="wchen" data-status="Active" data-disabled="false" data-roles="Report Viewer">
+                  <td class="font-medium">Wei Chen</td><td>wchen</td>
+                  <td><span class="badge badge-success badge-sm">Active</span></td>
+                </tr>
+                <tr class="cursor-pointer" data-user-id="sofia-ramirez" data-full-name="Sofia Ramirez" data-login-name="sramirez" data-status="Disabled" data-disabled="true" data-roles="Company Manager">
+                  <td class="font-medium">Sofia Ramirez</td><td>sramirez</td>
+                  <td><span class="badge badge-ghost badge-sm">Disabled</span></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+        </div>
+
+        <!-- ===== Company Manager ===== -->
+        <div id="tab-companies" class="tab-content-panel hidden">
+          <div class="flex flex-wrap items-center gap-2 mb-4">
+            <label class="input input-bordered input-sm flex items-center gap-2 max-w-xs">
+              <i data-lucide="search" class="w-4 h-4 opacity-50"></i>
+              <input type="text" class="grow" placeholder="Search companies" data-filter-target="table-companies" />
+            </label>
+            <div class="grow"></div>
+            <button class="btn btn-sm btn-primary" data-toast="New company created"><i data-lucide="plus" class="w-4 h-4"></i>New Company</button>
+          </div>
+          <div class="overflow-x-auto rounded-box border border-base-300">
+            <table class="table table-zebra" id="table-companies">
+              <thead><tr><th>Company Name</th><th>File Name</th><th>Stantec Starting Date</th><th>Closing Date</th><th>Earliest WIP Date</th><th>Payroll Date</th><th>Locked</th><th class="text-right">Open Company</th></tr></thead>
+              <tbody>
+                <tr>
+                  <td class="font-medium">Stantec Consulting Ltd.</td><td>STN-CA-001.dat</td><td>2021-01-01</td><td>2026-12-31</td><td>2021-01-01</td><td>2026-09-25</td>
+                  <td><input type="checkbox" class="toggle toggle-sm toggle-warning" aria-label="Lock Stantec Consulting Ltd." data-company-lock /></td>
+                  <td class="text-right"><button class="btn btn-ghost btn-xs" data-toast="Stantec Consulting Ltd. opened"><i data-lucide="external-link" class="w-3.5 h-3.5"></i><span>Open</span></button></td>
+                </tr>
+                <tr>
+                  <td class="font-medium">Stantec Consulting Services Inc.</td><td>STN-US-002.dat</td><td>2020-06-01</td><td>2026-12-31</td><td>2020-06-01</td><td>2026-09-25</td>
+                  <td><input type="checkbox" class="toggle toggle-sm toggle-warning" aria-label="Lock Stantec Consulting Services Inc." data-company-lock /></td>
+                  <td class="text-right"><button class="btn btn-ghost btn-xs" data-toast="Stantec Consulting Services Inc. opened"><i data-lucide="external-link" class="w-3.5 h-3.5"></i><span>Open</span></button></td>
+                </tr>
+                <tr>
+                  <td class="font-medium">Stantec UK Ltd.</td><td>STN-UK-003.dat</td><td>2019-04-01</td><td>2026-12-31</td><td>2019-04-01</td><td>2026-09-25</td>
+                  <td><input type="checkbox" class="toggle toggle-sm toggle-warning" aria-label="Lock Stantec UK Ltd." data-company-lock /></td>
+                  <td class="text-right"><button class="btn btn-ghost btn-xs" data-toast="Stantec UK Ltd. opened"><i data-lucide="external-link" class="w-3.5 h-3.5"></i><span>Open</span></button></td>
+                </tr>
+                <tr>
+                  <td class="font-medium">TargetCo Asia Pacific Pte. Ltd.</td><td>TGT-SG-010.dat</td><td>2025-07-01</td><td>2026-12-31</td><td>2025-07-01</td><td>2026-09-25</td>
+                  <td><input type="checkbox" class="toggle toggle-sm toggle-warning" aria-label="Lock TargetCo Asia Pacific Pte. Ltd." data-company-lock /></td>
+                  <td class="text-right"><button class="btn btn-ghost btn-xs" data-toast="TargetCo Asia Pacific Pte. Ltd. opened"><i data-lucide="external-link" class="w-3.5 h-3.5"></i><span>Open</span></button></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- ===== Diagnostics ===== -->
+        <div id="tab-diagnostics" class="tab-content-panel hidden">
+          <h3 class="font-semibold text-sm mb-3 flex items-center gap-2"><i data-lucide="database" class="w-4 h-4 text-primary"></i>Data Sources</h3>
+          <div class="overflow-x-auto rounded-box border border-base-300">
+            <table class="table table-zebra">
+              <thead><tr><th>Setting</th><th>Location</th></tr></thead>
+              <tbody>
+                <tr><td class="font-medium">Main Data Source</td><td>Oracle HCM Production</td></tr>
+                <tr><td class="font-medium">PAP Data Source</td><td>Oracle HCM PAP</td></tr>
+                <tr><td class="font-medium">MAP Data Source</td><td>Oracle HCM MAP</td></tr>
+                <tr><td class="font-medium">File Storage Location</td><td>\\stantec.local\hra\company-files</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+      </div>
+      </main>
+
+      <div class="drawer-side z-[60]">
+        <label for="userDrawer" class="drawer-overlay"></label>
+        <div class="bg-base-100 h-screen w-full max-w-lg flex flex-col shadow-2xl overflow-hidden">
+          <div class="flex items-center justify-between gap-3 px-5 h-16 border-b border-base-300 bg-base-200/50 shrink-0">
+            <div class="flex items-center gap-3 min-w-0">
+              <span class="w-9 h-9 rounded-lg bg-primary/10 text-primary flex items-center justify-center shrink-0"><i data-lucide="user-round" class="w-4.5 h-4.5"></i></span>
+              <div class="min-w-0"><h2 class="font-semibold text-base leading-tight">Edit User</h2><p id="user-details-name" class="text-xs text-base-content/50 leading-tight"></p></div>
+            </div>
+            <label for="userDrawer" class="btn btn-ghost btn-circle btn-sm shrink-0" aria-label="Close user editor"><i data-lucide="x" class="w-5 h-5"></i></label>
+          </div>
+          <div id="user-details" class="flex-1 overflow-y-auto scroll-thin p-5 space-y-5">
+            <div class="flex flex-wrap items-start justify-between gap-3">
+              <div><p class="text-xs text-base-content/60">Login Name</p><p id="user-details-login" class="font-medium"></p></div>
+              <label class="label cursor-pointer gap-2 border border-base-300 rounded-lg px-3 py-2"><span class="label-text text-sm">Disabled</span><input id="user-disabled" type="checkbox" class="toggle toggle-sm toggle-warning" /></label>
+            </div>
+            <div><p class="text-xs text-base-content/60">Status</p><p id="user-details-status" class="font-medium"></p></div>
+            <div class="flex items-center justify-between gap-2"><h3 class="font-semibold text-sm">Roles</h3><button id="add-role-button" class="btn btn-sm btn-primary"><i data-lucide="plus" class="w-4 h-4"></i>Add Role</button></div>
+            <div id="role-form" class="hidden flex flex-wrap gap-2"><input id="role-name-input" class="input input-bordered input-sm flex-1 min-w-48" placeholder="Role name" /><button id="save-role-button" class="btn btn-sm btn-primary">Save</button><button id="cancel-role-button" class="btn btn-sm btn-ghost">Cancel</button></div>
+            <div class="overflow-x-auto rounded-box border border-base-300"><table class="table table-sm"><thead><tr><th>Role Name</th><th>Disabled</th><th class="text-right">Actions</th></tr></thead><tbody id="user-roles-body"></tbody></table></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="mt-auto">
+      <div class="flex flex-col items-center justify-center text-center text-sm font-medium text-base-content/50 sm:flex-row sm:gap-2 py-3">
+        <span>Compensation Toolkit</span>
+        <span class="hidden sm:inline" aria-hidden="true">·</span>
+        <span>vNIGHTLY</span>
+        <span class="hidden sm:inline" aria-hidden="true">·</span>
+        <span>Built by Stantec Software Solutions</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<dialog id="newCompanyModal" class="modal">
+  <div class="modal-box max-w-2xl">
+    <form method="dialog">
+      <button class="btn btn-sm btn-circle btn-ghost absolute right-3 top-3">✕</button>
+    </form>
+    <div class="flex items-center gap-3 mb-4">
+      <span class="w-10 h-10 rounded-lg bg-primary/10 text-primary flex items-center justify-center shrink-0"><i data-lucide="building-2" class="w-5 h-5"></i></span>
+      <div>
+        <h3 class="font-semibold text-lg">New Company</h3>
+        <p class="text-xs text-base-content/50">Set up a new company record for HR Acquisition.</p>
+      </div>
+    </div>
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+      <div class="form-control sm:col-span-2">
+        <label class="label py-1"><span class="label-text text-xs">Company Name</span></label>
+        <input class="input input-bordered input-sm" placeholder="e.g. Stantec Consulting Ltd." />
+      </div>
+      <div class="form-control">
+        <label class="label py-1"><span class="label-text text-xs">Company Code</span></label>
+        <input class="input input-bordered input-sm" placeholder="e.g. STN-CA-004" />
+      </div>
+      <div class="form-control">
+        <label class="label py-1"><span class="label-text text-xs">Legal Company Name</span></label>
+        <input class="input input-bordered input-sm" placeholder="Legal entity name" />
+      </div>
+      <div class="form-control">
+        <label class="label py-1"><span class="label-text text-xs">Country</span></label>
+        <select class="select select-bordered select-sm">
+          <option selected disabled>Select country</option>
+          <option>Canada</option><option>United States</option><option>United Kingdom</option><option>Germany</option><option>Singapore</option>
+        </select>
+      </div>
+      <div class="form-control">
+        <label class="label py-1"><span class="label-text text-xs">Currency</span></label>
+        <select class="select select-bordered select-sm">
+          <option selected disabled>Select currency</option>
+          <option>CAD - Canadian Dollar</option><option>USD - US Dollar</option><option>EUR - Euro</option><option>GBP - British Pound</option>
+        </select>
+      </div>
+      <div class="form-control">
+        <label class="label py-1"><span class="label-text text-xs">Language</span></label>
+        <select class="select select-bordered select-sm">
+          <option selected>English</option><option>Français</option><option>Español</option>
+        </select>
+      </div>
+      <div class="form-control">
+        <label class="label py-1"><span class="label-text text-xs">Time Zone</span></label>
+        <select class="select select-bordered select-sm">
+          <option selected disabled>Select time zone</option>
+          <option>(UTC-05:00) Eastern Time</option><option>(UTC-08:00) Pacific Time</option><option>(UTC+00:00) London</option><option>(UTC+01:00) Berlin</option>
+        </select>
+      </div>
+      <div class="form-control">
+        <label class="label py-1"><span class="label-text text-xs">Effective Date</span></label>
+        <input type="date" class="input input-bordered input-sm" />
+      </div>
+      <div class="form-control sm:col-span-2">
+        <label class="label py-1"><span class="label-text text-xs">Default Business Center</span></label>
+        <select class="select select-bordered select-sm">
+          <option selected disabled>Select business center</option>
+          <option>BC-100 · Corporate HQ</option><option>BC-200 · EMEA Operations</option><option>BC-300 · APAC Shared Services</option><option>BC-400 · LATAM Delivery</option>
+        </select>
+      </div>
+    </div>
+    <div class="modal-action">
+      <form method="dialog" class="flex gap-2">
+        <button class="btn btn-ghost btn-sm">Cancel</button>
+        <button class="btn btn-primary btn-sm" data-toast="Company created (UI only)">Create Company</button>
+      </form>
+    </div>
+  </div>
+  <form method="dialog" class="modal-backdrop">
+    <button>close</button>
+  </form>
+</dialog>
+
+<div id="toastContainer" class="toast toast-end"></div>
+<script src="assets/js/app.js"></script>
+</body>
+</html>

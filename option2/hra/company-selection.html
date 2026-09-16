@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="ctk-light">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Select Company · HR Acquisition Administration</title>
+<script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+<link href="https://cdn.jsdelivr.net/npm/daisyui@5" rel="stylesheet" type="text/css" />
+<script src="https://unpkg.com/lucide@latest"></script>
+<link rel="stylesheet" href="assets/css/theme.css" />
+<link rel="stylesheet" href="assets/css/custom.css" />
+</head>
+<body class="bg-base-200 text-base-content">
+
+<main class="min-h-screen flex items-center justify-center p-4">
+  <div class="w-full max-w-2xl">
+    <div class="flex flex-col items-center gap-2 mb-6">
+      <div class="w-12 h-12 rounded-lg bg-primary text-primary-content flex items-center justify-center font-bold text-lg">HR</div>
+      <span class="block font-semibold text-lg">HR Acquisition</span>
+      <span class="block text-xs font-normal text-base-content/60">Administration</span>
+    </div>
+
+    <section class="card bg-base-100 border border-base-300 shadow-sm rounded-box">
+      <div class="card-body p-6 lg:p-8">
+        <div class="flex items-start gap-3 mb-6">
+          <div class="rounded-lg bg-primary/15 text-primary p-2.5 shrink-0">
+            <i data-lucide="building-2" class="w-5 h-5"></i>
+          </div>
+          <div>
+            <h1 class="text-lg font-semibold">Select a company</h1>
+            <p class="text-sm text-base-content/60 mt-1">Choose the company you want to work with for this session.</p>
+          </div>
+        </div>
+
+        <form id="companySelectionForm" class="space-y-4" novalidate>
+          <fieldset>
+            <legend class="sr-only">Available companies</legend>
+          <div class="grid gap-3 sm:grid-cols-2">
+            <label class="company-option border border-primary bg-primary/5 rounded-box p-4 cursor-pointer transition-colors hover:bg-primary/10">
+              <input type="radio" name="company" value="STN-CA-001" data-company-name="Stantec Consulting Ltd." class="radio radio-primary mr-2" checked />
+              <span class="align-middle">
+                <span class="block font-semibold text-sm">Stantec Consulting Ltd.</span>
+                <span class="block text-xs text-base-content/60 mt-1">STN-CA-001 · Canada</span>
+              </span>
+            </label>
+            <label class="company-option border border-base-300 rounded-box p-4 cursor-pointer transition-colors hover:bg-base-200">
+              <input type="radio" name="company" value="STN-US-002" data-company-name="Stantec Consulting Services Inc." class="radio radio-primary mr-2" />
+              <span class="align-middle">
+                <span class="block font-semibold text-sm">Stantec Consulting Services Inc.</span>
+                <span class="block text-xs text-base-content/60 mt-1">STN-US-002 · United States</span>
+              </span>
+            </label>
+            <label class="company-option border border-base-300 rounded-box p-4 cursor-pointer transition-colors hover:bg-base-200">
+              <input type="radio" name="company" value="STN-UK-003" data-company-name="Stantec UK Ltd." class="radio radio-primary mr-2" />
+              <span class="align-middle">
+                <span class="block font-semibold text-sm">Stantec UK Ltd.</span>
+                <span class="block text-xs text-base-content/60 mt-1">STN-UK-003 · United Kingdom</span>
+              </span>
+            </label>
+            <label class="company-option border border-base-300 rounded-box p-4 cursor-pointer transition-colors hover:bg-base-200">
+              <input type="radio" name="company" value="TGT-SG-010" data-company-name="TargetCo Asia Pacific Pte. Ltd." class="radio radio-primary mr-2" />
+              <span class="align-middle">
+                <span class="block font-semibold text-sm">TargetCo Asia Pacific Pte. Ltd.</span>
+                <span class="block text-xs text-base-content/60 mt-1">TGT-SG-010 · Singapore</span>
+              </span>
+            </label>
+          </div>
+          </fieldset>
+
+          <p id="companySelectionError" class="text-error text-sm hidden">Select a company to continue.</p>
+
+          <div class="flex items-center justify-between gap-3 pt-2">
+            <a href="login.html" class="btn btn-ghost btn-sm">Back to sign in</a>
+            <button type="submit" class="btn btn-primary">
+              Continue to administration <i data-lucide="arrow-right" class="w-4 h-4"></i>
+            </button>
+          </div>
+        </form>
+      </div>
+    </section>
+
+    <p class="text-center text-xs text-base-content/50 mt-4">© 2026 Stantec. Internal use only.</p>
+  </div>
+</main>
+
+<script>
+  lucide.createIcons();
+
+  var companyOptions = document.querySelectorAll('.company-option');
+  companyOptions.forEach(function (option) {
+    option.querySelector('input').addEventListener('change', function () {
+      companyOptions.forEach(function (item) {
+        item.classList.toggle('border-primary', item.querySelector('input').checked);
+        item.classList.toggle('bg-primary/5', item.querySelector('input').checked);
+        item.classList.toggle('border-base-300', !item.querySelector('input').checked);
+      });
+    });
+  });
+
+  document.getElementById('companySelectionForm').addEventListener('submit', function (event) {
+    event.preventDefault();
+    var selected = document.querySelector('input[name="company"]:checked');
+    var error = document.getElementById('companySelectionError');
+
+    if (!selected) {
+      error.classList.remove('hidden');
+      return;
+    }
+
+    error.classList.add('hidden');
+    localStorage.setItem('hra_default_company', JSON.stringify({
+      code: selected.value,
+      name: selected.getAttribute('data-company-name')
+    }));
+    window.location.href = 'index.html';
+  });
+</script>
+
+</body>
+</html>

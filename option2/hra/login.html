@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="ctk-light">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Sign In · HR Acquisition Administration</title>
+<script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+<link href="https://cdn.jsdelivr.net/npm/daisyui@5" rel="stylesheet" type="text/css" />
+<script src="https://unpkg.com/lucide@latest"></script>
+<link rel="stylesheet" href="assets/css/theme.css" />
+<link rel="stylesheet" href="assets/css/custom.css" />
+</head>
+<body class="bg-base-200 text-base-content">
+
+<div class="min-h-screen flex items-center justify-center p-4">
+  <div class="w-full max-w-sm">
+    <div class="flex flex-col items-center gap-2 mb-6">
+      <div class="w-12 h-12 rounded-lg bg-primary text-primary-content flex items-center justify-center font-bold text-lg">HR</div>
+      <span class="block font-semibold text-lg">HR Acquisition</span>
+      <span class="block text-xs font-normal text-base-content/60">Administration</span>
+    </div>
+
+    <div class="card bg-base-100 border border-base-300 shadow-sm rounded-box">
+      <div class="card-body p-6 lg:p-8">
+        <h1 class="text-lg font-semibold mb-1">Sign In</h1>
+        <p class="text-sm text-base-content/60 mb-4">Enter your credentials to access the administration portal.</p>
+
+        <form id="signInForm" class="space-y-4" novalidate>
+          <label class="form-control">
+            <span class="label-text text-xs px-0.5 pb-1">Email</span>
+            <label class="input input-bordered flex items-center gap-2">
+              <i data-lucide="mail" class="w-4 h-4 opacity-50 shrink-0"></i>
+              <input id="signInEmail" type="email" class="grow" placeholder="jordan.delgado@stantec.com" required autocomplete="username" />
+            </label>
+          </label>
+
+          <label class="form-control">
+            <span class="label-text text-xs px-0.5 pb-1">Password</span>
+            <label class="input input-bordered flex items-center gap-2">
+              <i data-lucide="lock" class="w-4 h-4 opacity-50 shrink-0"></i>
+              <input id="signInPassword" type="password" class="grow" placeholder="••••••••" required autocomplete="current-password" />
+            </label>
+          </label>
+
+          <div class="flex items-center justify-between text-sm">
+            <label class="label cursor-pointer gap-2 p-0">
+              <input type="checkbox" class="checkbox checkbox-sm" checked />
+              <span class="label-text">Remember me</span>
+            </label>
+            <a href="#" class="link link-primary text-sm">Forgot password?</a>
+          </div>
+
+          <p id="signInError" class="text-error text-sm hidden">Please enter both an email and a password.</p>
+
+          <button type="submit" class="btn btn-primary w-full">
+            <i data-lucide="log-in" class="w-4 h-4"></i>Sign In
+          </button>
+        </form>
+      </div>
+    </div>
+
+    <p class="text-center text-xs text-base-content/50 mt-4">© 2026 Stantec. Internal use only.</p>
+  </div>
+</div>
+
+<script>
+  lucide.createIcons();
+
+  // Sign-in is UI-only; any non-empty credentials route to the default Company page.
+  document.getElementById('signInForm').addEventListener('submit', function (event) {
+    event.preventDefault();
+    var email = document.getElementById('signInEmail').value.trim();
+    var password = document.getElementById('signInPassword').value.trim();
+    var error = document.getElementById('signInError');
+
+    if (!email || !password) {
+      error.classList.remove('hidden');
+      return;
+    }
+
+    error.classList.add('hidden');
+    window.location.href = 'company-selection.html';
+  });
+</script>
+
+</body>
+</html>
